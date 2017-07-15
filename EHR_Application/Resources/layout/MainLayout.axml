@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="300px"
+        android:id="@+id/linearLayout1">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView1"
+            android:src="@drawable/EHRimage"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:text="Connect to EHR_App"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="700px"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="270px" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="240px"
+        android:background="@drawable/border"
+        android:id="@+id/linearLayout23">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:id="@+id/linearLayout3">
+            <TextView
+                android:text="UserName :"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/textView2" />
+            <EditText
+                android:layout_width="400px"
+                android:layout_height="match_parent"
+                android:id="@+id/Username" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:id="@+id/linearLayout4">
+            <TextView
+                android:text="Password  :"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/textView3" />
+            <EditText
+                android:layout_width="400px"
+                android:layout_height="match_parent"
+                android:id="@+id/Password" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+        android:id="@+id/linearLayout5">
+        <Button
+            android:text="Login"
+            android:layout_width="230px"
+            android:layout_height="wrap_content"
+            android:id="@+id/Login"
+            android:layout_gravity="right"
+            android:layout_marginRight="50px" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="500px"
+        android:id="@+id/linearLayout6">
+        <TextView
+            android:text="Results :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5" />
+        <TextView
+            android:layout_width="800px"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt1"
+            android:maxLines="200"
+            android:minLines="30"
+            android:scrollbars="vertical"
+            android:layout_gravity="left"
+            android:fadeScrollbars="true" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:id="@+id/linearLayout7">
+        <TextView
+            android:text="Errors :"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView4" />
+        <TextView
+            android:layout_width="600px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt2" />
+    </LinearLayout>
+</LinearLayout>

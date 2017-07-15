@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="110px"
+        android:id="@+id/linearLayout100">
+        <TextView
+            android:text="Demographic Data of :"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="460px"
+            android:layout_height="100px"
+            android:id="@+id/textView1"
+            android:layout_gravity="left" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout1"
+        android:layout_gravity="clip_vertical">
+        <TextView
+            android:text="FirstName :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView2" />
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt13" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:text="LastName :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView3" />
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt14" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout3">
+        <TextView
+            android:text="Country :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView4" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt15" />
+        <TextView
+            android:text="City :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView16" />
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt16" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout4">
+        <TextView
+            android:text="StreetName :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView5" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt24" />
+        <TextView
+            android:text="StretNumber :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView17" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt17" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout5">
+        <TextView
+            android:text="Sex :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView6" />
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt18" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout6">
+        <TextView
+            android:text="Birthday :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView7" />
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt19" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout7">
+        <TextView
+            android:text="Email :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView8" />
+        <TextView
+            android:text="1."
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView24" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt20" />
+        <TextView
+            android:text="2."
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView26" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt21" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:id="@+id/linearLayout8">
+        <TextView
+            android:text="Telephone :"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView9" />
+        <TextView
+            android:text="1."
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView28" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt22" />
+        <TextView
+            android:text="2."
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView30" />
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:id="@+id/txt23" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:background="@drawable/border"
+        android:id="@+id/linearLayout16">
+        <Button
+            android:text="SelectPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:id="@+id/SelectPerson" />
+        <Button
+            android:text="SendDataToDoctor"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:id="@+id/sendData"
+            android:layout_marginTop="0.0dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:id="@+id/linearLayout101">
+        <Button
+            android:text="HEALTHBUTTON"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/health_button" />
+        <Button
+            android:text="Messages"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/messages" />
+        <Button
+            android:text="PHOTOS"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/photos" />
+    </LinearLayout>
+</LinearLayout>
