@@ -84,7 +84,7 @@ namespace EHR_Application
             bool IsValidJson;
             ConsumeRest cRest = new ConsumeRest();
             object strResponse;
-            string endpoint = "http://192.168.2.3:54240/api/Demographics/" + PerID; 
+            string endpoint = "http://192.168.1.70:54240/api/Demographics/" + PerID; 
             strResponse = cRest.makeRequest(endpoint);
             
             ValidateJson validateJson = new ValidateJson();
@@ -165,7 +165,7 @@ namespace EHR_Application
             _lstDataItem.Clear();                                            // check it  ( it was changed )           
             ConsumeRest cRest = new ConsumeRest();
             object strResponse;
-            string endpoint = "http://192.168.2.3:54240/api/YOURCONTROLLER/" + PerID;    //Contacts";
+            string endpoint = "http://192.168.1.70:54240/api/YOURCONTROLLER/" + PerID;    //Contacts";
 
             strResponse = cRest.makeRequest(endpoint);
 

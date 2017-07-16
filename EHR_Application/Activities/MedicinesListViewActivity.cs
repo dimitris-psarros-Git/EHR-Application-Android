@@ -44,7 +44,7 @@ namespace EHR_Application.Activities
 
             
             ConsumeRest cRest = new ConsumeRest();
-            string endpoint = "http://192.168.2.13:54240/api/Treat_Medicines";
+            string endpoint = "http://192.168.1.70:54240/api/Treat_Medicines";
             strResponse = cRest.makeRequest(endpoint);
             
 

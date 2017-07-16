@@ -53,7 +53,7 @@ namespace EHR_Application
         private void Actions()
         {
             ConsumeRest cRest = new ConsumeRest();
-            string endpoint = "http://192.168.2.13:54240//api/visits//?PersonId=1002";
+            string endpoint = "http://192.168.1.70:54240//api/visits//?PersonId=1002";
             strResponse = cRest.makeRequest(endpoint);
 
             ValidateJson validateJson = new ValidateJson();

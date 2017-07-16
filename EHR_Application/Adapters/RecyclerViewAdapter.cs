@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
+using Square.Picasso;
 
 namespace EHR_Application.Adapters
 {
@@ -22,9 +23,7 @@ namespace EHR_Application.Adapters
         {
             imageView = itemView.FindViewById<ImageView>(Resource.Id.imageView);
             txtDescription = itemView.FindViewById<TextView>(Resource.Id.txtDescription);
-            
         }
-        
     }
 
 
@@ -49,7 +48,8 @@ namespace EHR_Application.Adapters
         {
             RecyclerViewHolder viewHolder = holder as RecyclerViewHolder;
             //viewHolder.imageView.SetImageResource(lstData[position].imageId);
-            viewHolder.imageView.SetImageDrawable(null);                           //tsekare thn allagh pou egine
+            Picasso.With(Application.Context).Load(Resource.Drawable.EHRimage).Into(viewHolder.imageView);
+            viewHolder.imageView.SetImageDrawable(lstData[position].imageId); 
             viewHolder.txtDescription.Text = lstData[position].description;
         }
 

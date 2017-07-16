@@ -51,7 +51,7 @@ namespace EHR_Application.Activities
         {
             ConsumeRest cRest = new ConsumeRest();
             object strResponse;
-            string endpoint = "http://192.168.2.3:54240/api/YOURCONTROLLER/" + PerID;
+            string endpoint = "http://192.168.1.70:54240/api/YOURCONTROLLER/" + PerID;
             strResponse = cRest.makeRequest(endpoint);
 
             ValidateJson validateJson = new ValidateJson();

@@ -10,14 +10,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-using System.Drawing;
-using Android.Graphics.Drawables;
-
-namespace EHR_Application
+namespace EHR_Application.Models
 {
-    class DataRecyclerView
+    class lstBitmap
     {
-        public Drawable imageId { get; set; }
-        public string description { get; set; }
+        public Android.Graphics.Bitmap BitMap { get; set; } 
     }
 }

@@ -51,7 +51,7 @@ namespace EHR_Application
             bool IsValid;
             
             List<ReceivedMessages> chMessages;
-            string endpoint = "http://192.168.2.3:54240/api/Messages1/"+PerID+"/"+PerCon;
+            string endpoint = "http://192.168.1.70:54240/api/Messages1/"+PerID+"/"+PerCon;
 
             ConsumeRest cRest = new ConsumeRest();
             strResponse = cRest.makeRequest(endpoint);
