@@ -41,8 +41,6 @@ namespace EHR_Application
 
         public System.Drawing.Image byteArrayToImage(byte[] byteArrayIn)
         {
-
-
             try
             {
                 MemoryStream ms = new MemoryStream(byteArrayIn);
@@ -55,8 +53,5 @@ namespace EHR_Application
                 return null ;
             }
         }
-
-
-
     }
 }

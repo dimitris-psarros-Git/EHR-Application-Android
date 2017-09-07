@@ -12,9 +12,9 @@ using Android.Widget;
 
 namespace EHR_Application.Models
 {
-    class Userch
+    public class ContactsPerson5
     {
-        public int PersonID { get; set; }
-        public bool IsDoctor { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

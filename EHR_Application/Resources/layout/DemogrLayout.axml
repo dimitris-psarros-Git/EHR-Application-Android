@@ -6,12 +6,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="110px"
+        android:layout_height="140px"
         android:id="@+id/linearLayout100">
         <TextView
             android:text="Demographic Data of :"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="460px"
+            android:layout_width="500px"
             android:layout_height="100px"
             android:id="@+id/textView1"
             android:layout_gravity="left" />
@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:id="@+id/space1" />
         <TextView
-            android:layout_width="200px"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/txt1" />
     </LinearLayout>
@@ -144,39 +144,23 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="80px"
+        android:layout_height="110px"
         android:id="@+id/linearLayout7">
         <TextView
             android:text="Email :"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="72dp"
             android:layout_height="match_parent"
             android:id="@+id/textView8" />
-        <TextView
-            android:text="1."
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:id="@+id/textView24" />
-        <TextView
-            android:layout_width="200px"
-            android:layout_height="match_parent"
-            android:id="@+id/txt20" />
-        <TextView
-            android:text="2."
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/textView26" />
-        <TextView
-            android:layout_width="200px"
-            android:layout_height="match_parent"
-            android:id="@+id/txt21" />
+            android:id="@+id/spinner2" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="80px"
+        android:layout_height="110px"
         android:id="@+id/linearLayout8">
         <TextView
             android:text="Telephone :"
@@ -184,66 +168,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/textView9" />
-        <TextView
-            android:text="1."
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:id="@+id/textView28" />
-        <TextView
-            android:layout_width="200px"
-            android:layout_height="match_parent"
-            android:id="@+id/txt22" />
-        <TextView
-            android:text="2."
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/textView30" />
-        <TextView
-            android:layout_width="200px"
-            android:layout_height="match_parent"
-            android:id="@+id/txt23" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="80px"
-        android:background="@drawable/border"
-        android:id="@+id/linearLayout16">
-        <Button
-            android:text="SelectPerson"
-            android:layout_width="wrap_content"
-            android:layout_height="100px"
-            android:id="@+id/SelectPerson" />
-        <Button
-            android:text="SendDataToDoctor"
-            android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:id="@+id/sendData"
-            android:layout_marginTop="0.0dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100px"
-        android:id="@+id/linearLayout101">
-        <Button
-            android:text="HEALTHBUTTON"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/health_button" />
-        <Button
-            android:text="Messages"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/messages" />
-        <Button
-            android:text="PHOTOS"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/photos" />
+            android:id="@+id/spinner1" />
     </LinearLayout>
 </LinearLayout>

@@ -14,7 +14,9 @@ namespace EHR_Application.Models
 {
     class Communication
     {
-        public int telaphone { get; set; }
+        public int CommunicationID { get; set; }
+        public Nullable<int> PersonID { get; set; }
+        public int Telephone { get; set; }
         public string email { get; set; }
 
     }

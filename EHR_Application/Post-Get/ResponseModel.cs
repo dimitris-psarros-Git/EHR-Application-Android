@@ -1,4 +1,4 @@
-﻿namespace EHR_Application
+﻿namespace EHR_Application.Post_Get
 {
     internal class ResponseModel
     {

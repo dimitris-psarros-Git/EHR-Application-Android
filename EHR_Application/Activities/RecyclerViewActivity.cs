@@ -37,7 +37,7 @@ namespace EHR_Application.Activities
         List<DataRecyclerView> lstData = new List<DataRecyclerView>();
         List<imageIDs> imageIds;
         List<imagesChat> imageChats;
-        imaGG imageRecycle;
+        imagesChat imageRecycle;
         Drawable icon;
         Drawable image23,imageRecycle1, imageRecycle12;
 
@@ -47,6 +47,7 @@ namespace EHR_Application.Activities
             SetContentView(Resource.Layout.RecyclerviewLayout);
 
             bitmap4 = Start();
+
             //Android.Graphics.Bitmap bitmap12 = ResizeBitmap(bitmap4, 600, 400);
             Android.Graphics.Bitmap bitmap12 = scaleDown(bitmap4, 300, true);
             imageRecycle12 = new BitmapDrawable(bitmap12);
@@ -67,9 +68,10 @@ namespace EHR_Application.Activities
             /////////////////////   end of new code
 
             //LoadFromResources();
+
             object JsonText = LoadJson();
 
-            imageRecycle = JsonConvert.DeserializeObject<imaGG>(JsonText.ToString());
+            imageRecycle = JsonConvert.DeserializeObject<imagesChat>(JsonText.ToString());
 
             Android.Graphics.Bitmap bitmap = BitmapFactory.DecodeByteArray(imageRecycle.Picture, 0, imageRecycle.Picture.Length);
             //Android.Graphics.Bitmap bitmap1 = ResizeBitmap(bitmap, 600, 400);
@@ -80,25 +82,28 @@ namespace EHR_Application.Activities
             //Android.Graphics.Bitmap bitmap22 = bytesToBitmap(imaGg.Picture);
             //Android.Media.Image i = (Android.Media.Image)bitmap22;
            
+            ///////////////////////////////////////////////////////////////////////////////////   o kwdikas
             InputData();
+
             recycler = FindViewById<RecyclerView>(Resource.Id.recycler);
             recycler.HasFixedSize = true;
             layoutManager = new LinearLayoutManager(this);
             recycler.SetLayoutManager(layoutManager);
             adapter = new RecyclerViewAdapter(lstData);
             recycler.SetAdapter(adapter);
-           
+           /////////////////////////////////////////////////////////////////////////////////////  end kwdika
         }
 
         public Android.Graphics.Bitmap Start()
         {
-           
             bool IsValidJson;
             ConsumeRest cRest = new ConsumeRest();
             ValidateJson validateJson = new ValidateJson();
 
             object strResponse;
-            string endpoint = "http://192.168.1.70:54240/api/Messages2/" + 1000 + "/" + 1001;
+            Address address = new Address();
+            string endpoint = address.Endpoint+ "Messages2/" + 1000 + "/" + 1001;
+            //string endpoint = "http://192.168.2.6:54240/api/Messages2/" + 1000 + "/" + 1001;
             strResponse = cRest.makeRequest(endpoint);
             IsValidJson = validateJson.IsValidJson(strResponse);
             if (IsValidJson == true)
@@ -111,7 +116,8 @@ namespace EHR_Application.Activities
                 for (int i = 0; i < imageIds.Count; i++) {
                     //bitmapList = null;
                     object strResponse2;
-                    string endpoint2 = "http://192.168.1.70:54240/api/DataSenders/" + imageIds[i].DataSenderId ;
+                    //Address address = new Address()
+                    string endpoint2 = address.Endpoint + "DataSenders/" + imageIds[i].DataSenderId;
                     strResponse2 = cRest.makeRequest(endpoint2);
                     IsValidJson = validateJson.IsValidJson(strResponse);
                     if (IsValidJson == true)

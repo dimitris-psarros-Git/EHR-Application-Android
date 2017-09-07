@@ -44,9 +44,7 @@ namespace EHR_Application
         
         public object makeRequest(string endpoint)   
         {
-
-            object strResponceValue = null; // = string.Empty;
-            
+            object strResponceValue = null; 
             try
             {
                 WebRequest webRequest1 = WebRequest.Create(endpoint);
@@ -67,28 +65,24 @@ namespace EHR_Application
                 }
               
                
-                /*    Otherwise with HttpWebRequest
+                     //Otherwise with HttpWebRequest
+               // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
+               // request.Method = httpMethod.ToString();
+               ////  request.Accept = "application/json";
+               // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+               // if (response.StatusCode == HttpStatusCode.OK)
+               // {
+               //     //  throw new ApplicationException("error code:" + response.StatusCode.ToString());
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
-
-                request.Method = httpMethod.ToString();
-               //  request.Accept = "application/json";
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    //  throw new ApplicationException("error code:" + response.StatusCode.ToString());
-
-                    using (Stream responseStream = response.GetResponseStream())
-                    {
-                        using (StreamReader reader = new StreamReader(responseStream))
-                        {
-                            strResponceValue = reader.ReadToEnd();
-                        }
-                    }
-                    // response.Close();
-                }
-               */
+               //     using (Stream responseStream = response.GetResponseStream())
+               //     {
+               //         using (StreamReader reader = new StreamReader(responseStream))
+               //         {
+               //             strResponceValue = reader.ReadToEnd();
+               //         }
+               //     }
+               //     // response.Close();
+               // }
                
                 return strResponceValue;
             }
@@ -106,7 +100,6 @@ namespace EHR_Application
             {
               
        //         main.Print(/*"\nThe following Exception was raised : "+ */ e.Message);
-               
                 return e.Message.ToString() ;
             }
         }

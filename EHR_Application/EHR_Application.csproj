@@ -111,36 +111,63 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\AllergiesActivity.cs" />
+    <Compile Include="Activities\DemographicsDataActivity.cs" />
+    <Compile Include="Activities\DemographicsDoctorActivity.cs" />
     <Compile Include="Activities\DiagnosisListViewActivity.cs" />
     <Compile Include="Activities\ListviewContactsActivity.cs" />
     <Compile Include="Activities\MedicinesListViewActivity.cs" />
+    <Compile Include="Activities\NewMessagesListActivity.cs" />
+    <Compile Include="Activities\NewVisitActivity.cs" />
     <Compile Include="Activities\Photo1Activity.cs" />
     <Compile Include="Activities\Photo2Activity.cs" />
     <Compile Include="Activities\RecyclerViewActivity.cs" />
     <Compile Include="Activities\ShowImageActivity.cs" />
+    <Compile Include="Activities\SplashScreenActivity.cs" />
+    <Compile Include="Activities\ToDoActivity.cs" />
     <Compile Include="Adapters\BaseAdapter.cs" />
     <Compile Include="Activities\ChatBubbleActivity.cs" />
     <Compile Include="Adapters\CustomAdapter2.cs" />
+    <Compile Include="Adapters\CustomAdapter3.cs" />
+    <Compile Include="Adapters\CustomAdapter4.cs" />
+    <Compile Include="Adapters\CustomAdapter5.cs" />
     <Compile Include="Adapters\RecyclerViewAdapter.cs" />
     <Compile Include="Adapters\ViewHolder.cs" />
+    <Compile Include="Address.cs" />
     <Compile Include="ContactsData.cs" />
     <Compile Include="DataRecyclerView.cs" />
+    <Compile Include="Helper\Customadapter.cs" />
+    <Compile Include="Helper\DbHelper.cs" />
     <Compile Include="ImageManager.cs" />
+    <Compile Include="Models\Allergies.cs" />
+    <Compile Include="Models\ContactsPerson5.cs" />
+    <Compile Include="Models\NewDiagnosis.cs" />
+    <Compile Include="Models\NewMedicines.cs" />
+    <Compile Include="Models\NewVisit.cs" />
+    <Compile Include="Models\VisitID.cs" />
+    <Compile Include="Perrita\ContactsPerson3.cs" />
+    <Compile Include="Models\Doctor2.cs" />
+    <Compile Include="Models\friends.cs" />
+    <Compile Include="Models\FullNames.cs" />
+    <Compile Include="Models\NewMessages.cs" />
     <Compile Include="Models\ContactsPerson2.cs" />
     <Compile Include="Models\imageIDs.cs" />
     <Compile Include="Models\imagesChat.cs" />
     <Compile Include="Models\imageViews.cs" />
-    <Compile Include="Models\imaGG.cs" />
+    <Compile Include="Perrita\imaGG.cs" />
     <Compile Include="Models\lstBitmap.cs" />
+    <Compile Include="Models\NewMessages2.cs" />
     <Compile Include="Models\ReceivedMessages.cs" />
     <Compile Include="Models\chatMessages.cs" />
-    <Compile Include="Models\Com.cs" />
+    <Compile Include="Perrita\communicationData.cs" />
     <Compile Include="Adapters\CustomAdapter.cs" />
     <Compile Include="Activities\DemographicActivity.cs" />
     <Compile Include="Activities\Activity4Activity.cs" />
     <Compile Include="Models\RecievedImage.cs" />
-    <Compile Include="Models\Userch.cs" />
+    <Compile Include="Models\SendMessages.cs" />
+    <Compile Include="Models\UserIdentity.cs" />
     <Compile Include="Models\Usercheck.cs" />
+    <Compile Include="Models\Visit2.cs" />
     <Compile Include="Post-Get\ConsumeRest.cs" />
     <Compile Include="Activities\FindPictureGalleryActivity.cs" />
     <Compile Include="Models\Communication.cs" />
@@ -150,17 +177,18 @@
     <Compile Include="Adapters\ExpandableListViewAdapter.cs" />
     <Compile Include="Activities\History_ListviewActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
-    <Compile Include="Models\SelectChoice.cs" />
-    <Compile Include="Models\Users.cs" />
+    <Compile Include="Perrita\SelectChoice.cs" />
+    <Compile Include="Perrita\Users.cs" />
     <Compile Include="Activities\PhotoActivity.cs" />
     <Compile Include="Post-Get\PostMultipart.cs" />
     <Compile Include="Post-Get\PostRest.cs" />
+    <Compile Include="Post-Get\PutRest.cs" />
+    <Compile Include="Post-Get\ResponseModel.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\treatment_medicines.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\visit.cs" />
-    <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Perrita\User.cs" />
+    <Compile Include="Perrita\visit.cs" />
     <Compile Include="Activities\SendDataActivity.cs" />
     <Compile Include="ValidateJson.cs" />
   </ItemGroup>
@@ -223,6 +251,36 @@
     <AndroidResource Include="Resources\layout\RecyclerItemLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\rowToDolayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\mainToDoLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\splashsreenlayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\rowAllergieslayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Listallergies.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DemographicDoctor.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\rowperonsitems.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\lstNewmes.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\newVisit.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListNewMessages.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\MainLayout.axml">
@@ -248,7 +306,9 @@
     <AndroidAsset Include="Assets\demographicsDETAILS.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-v21\styles.xml" />
@@ -282,6 +342,47 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\options_menu.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\popup_menu.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\option_menuDemogr.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\option_menuGener.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\contact.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\menu_item.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\option_menuDoctorDemogr.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\doctor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\message.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\error.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -14,35 +14,44 @@ using Newtonsoft.Json;
 using EHR_Application.Activities;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Android.Preferences;
 
 namespace EHR_Application
 {
-    [Activity(Label = "SendData")]
+    [Activity(Label = "     SendData  ", Theme = "@style/MyTheme1")]
     public class SendDataActivity : Activity
     {
         TextView txt1;
-        TextView txt8;
-        EditText txt7;
+        EditText message1;
+        EditText message2;
         DateTime now;
-        
+        //List<ContactsPerson2> contactsPerson2;
+
+        bool IsDoctor;
         byte[] image;
-        int PerID;
-        int ConID;
+        byte[] image1,image2;
+        int myID;
+        int receiverID;
+        DateTime datetime;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SdataLayout);
             
-             PerID = Intent.GetIntExtra("PerID", -1);
-             ConID = Intent.GetIntExtra("ConnectID", -1);
+            // Data from previous activity
+            myID = Intent.GetIntExtra("myID", -1);
+            receiverID = Intent.GetIntExtra("receiverID", -1);
             int PersID = Intent.GetIntExtra("PErsonId", -1);
-            byte[] image1 = Intent.GetByteArrayExtra("image");
-            /*var*/image = Intent.GetByteArrayExtra("picture");   // allaksame to image apo var se byte[]
+            image1 = Intent.GetByteArrayExtra("image");
+            image = Intent.GetByteArrayExtra("picture");   // allaksame to image apo var se byte[]
+
+            IsDoctor = RetrieveBool();
 
             txt1 = FindViewById<TextView>(Resource.Id.txt1);
-            txt8 = FindViewById<TextView>(Resource.Id.txt8);
-            txt7 = FindViewById<EditText>(Resource.Id.editxt);
+            message1 = FindViewById<EditText>(Resource.Id.editTxt1);
+            message2 = FindViewById<EditText>(Resource.Id.editxt);
 
             Button Sendtext = FindViewById<Button>(Resource.Id.SendText);
             Sendtext.Click += Sendtext_ClickAsync;
@@ -66,9 +75,44 @@ namespace EHR_Application
             string currentTime = (string.Format("Current Time: {0}", now)); 
         }
 
-        private void SendPhoto_ClickAsync(object sender, EventArgs e)
+        //#region MenuInflater
+        //public override bool OnCreateOptionsMenu(IMenu menu)
+        //{
+        //    MenuInflater.Inflate(Resource.Menu.options_menu, menu);
+        //    return true;
+        //}
+        //public override bool OnOptionsItemSelected(IMenuItem item)
+        //{
+        //    int id = item.ItemId;
+        //    if (id == Resource.Id.action_settings3)
+        //    {
+        //        Toast.MakeText(this, "Refresh", ToastLength.Short).Show();
+        //        this.Recreate();
+        //        return true;
+        //    }
+        //    else if (id == Resource.Id.action_settings2)
+        //    {
+        //        Toast.MakeText(this, "Exit", ToastLength.Short).Show();
+        //        AlertBox();
+        //        return true;
+        //    }
+        //    return base.OnOptionsItemSelected(item);
+        //    //return super.onCreateView(inflater, container, savedInstanceState);
+        //}
+        //#endregion
+
+
+        private bool RetrieveBool()
         {
-           if(image == null)
+            Context mContext = Android.App.Application.Context;
+            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(mContext);
+            bool mBool = prefs.GetBoolean("Is_Doctor", false);
+            return mBool;
+        }
+
+        private async void SendPhoto_ClickAsync(object sender, EventArgs e)
+        {
+            if (image1 == null)
             {
                 new AlertDialog.Builder(this)
                 .SetMessage("No Image Selected")
@@ -77,34 +121,77 @@ namespace EHR_Application
             }
             else
             {
-                /*
-                var requestContent = new MultipartFormDataContent();
+                datetime = DateTime.Now.ToLocalTime();
+            
+                String Message1 = message1.Text;
+                using (var client = new HttpClient())
+                {
+                    Address address = new Address();
+                    string endpoint = address.Endpoint + "DataSenderImage";   
 
-                var imageContent = new ByteArrayContent(File.ReadAllBytes(@"C:\Users\User\Desktop\w3.png"));
+                    var requestContent = new MultipartFormDataContent();
+                    image2 = image1;
+                    var imageContent = new ByteArrayContent(image2);
+                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/txt");
+                    
+                    if (IsDoctor == false)        //  to ID toy asthenh prepei na stalei prwto
+                    {
+                        requestContent.Add(new StringContent(myID.ToString()), "myID");
+                        requestContent.Add(new StringContent(receiverID.ToString()), "receiverID");
+                        requestContent.Add(new StringContent(0.ToString()), "Sender");
+                    }
+                    else
+                    {
+                        requestContent.Add(new StringContent(receiverID.ToString()), "receiverID");
+                        requestContent.Add(new StringContent(myID.ToString()), "myID");
+                        requestContent.Add(new StringContent(1.ToString()), "Sender");
+                    }
+                    requestContent.Add(imageContent, "image", "image.png");
+                    requestContent.Add(new StringContent(Message1.ToString()), "Message");
+                    requestContent.Add(new StringContent("false"), "Seen");
+                    requestContent.Add(new StringContent(datetime.ToString()), "date");     //check it
+                    requestContent.Add(new StringContent("false"), "Send");
 
-                image.Headers.ContentType = MediaTypeHeaderValue.Parse("image/txt");
-
-                requestContent.Add(image, "image", "image.png");
-                requestContent.Add(new StringContent("en-US"), "language");
-                requestContent.Add(new StringContent("blue"), "color");
-                requestContent.Add(new StringContent("12/11/15"), "date");
-                */
+                    //var response = 
+                    await client.PostAsync(endpoint /*"http://192.168.1.68:54240/api/Dat"*/, requestContent);//.Result;    // egine allagh tsekare to
+                    var exceptionResult = 8;
+                    //var input = await response.Content.ReadAsStringAsync();
+                    //return await client.PostAsync("http://192.168.1.68:54240/api/Dat", requestContent);
+                }
             }
         }
 
         private async void Sendtext_ClickAsync(object sender, EventArgs e)
         {
-            ReceivedMessages sendMessageJson = new ReceivedMessages();
-            sendMessageJson.PersonID = PerID;
-            sendMessageJson.ReseiverID = ConID;
-            sendMessageJson.Text = txt7.Text;
+            datetime = DateTime.Now.ToLocalTime();
             
+
+            SendMessages sendMessageJson = new SendMessages();
+
+            if (IsDoctor == false)        //  to ID toy asthenh prepei na stalei prwto
+            {
+                sendMessageJson.PatientID = myID;
+                sendMessageJson.DoctorID = receiverID;
+                sendMessageJson.Sender = 0;        
+            }
+            else
+            {
+                sendMessageJson.PatientID = receiverID;
+                sendMessageJson.DoctorID = myID;
+                sendMessageJson.Sender = 1;
+            }
+            sendMessageJson.Text = message2.Text;
+            sendMessageJson.Seen = false;
+            sendMessageJson.Date = datetime.ToString();
+            sendMessageJson.Send = false;
+
             string output = JsonConvert.SerializeObject(sendMessageJson);
-
-            var uri = new Uri("http://192.168.2.3:54240/api/DataSenders");
-            var StrRespPost = await PostRest.Post(output, uri);
-
-            if (StrRespPost == "Ok")                                              //     prosoxh den exei nohma thelei diorthwsh
+            Address address = new Address();
+            string endpoint = address.Endpoint + "DataSenders";
+            var uri = new Uri(endpoint);
+            var StrRespPost = await PostRest.Post(output, uri,true);
+            
+            if (StrRespPost == "Created")        // tsekare to giati mporei na stalei kai na epistrepsei diaforetiko mhnuma
             {
                 new AlertDialog.Builder(this)
                 .SetMessage("Successfully Send")
@@ -114,61 +201,70 @@ namespace EHR_Application
             else
             {
                 new AlertDialog.Builder(this)
-                .SetMessage("Unsuccessfull Send")
+                .SetMessage("Unsuccessfull Send!!"+ "\n" + "Something went wrong" + "\n" + StrRespPost)
                 .SetTitle("Message")
+                .SetIcon(Resource.Drawable.error)
                 .Show();
             }
         }
 
-
         private void Button4_Click(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(ChatBubbleActivity));
-            //intent.PutExtra("MyString", "This is a string");
+            intent.PutExtra("myID", myID);
+            intent.PutExtra("receiverID", receiverID);
             StartActivity(intent);
         }
-
+        
 
         #region ListView AlertDialog
-
         List<SelectChoice> selectChoice = new List<SelectChoice>();
         List<Tuple<int, string>> mylist = new List<Tuple<int, string>>();
+        List<FullNames> fullnameList1 = new List<FullNames>();
         List<string> _lstDataItem = new List<string>();
+        List<friends> deserializedContacts;
         string Name;
-        int Number;
+
 
         void methodInvokeAlertDialogWithListView(object sender, EventArgs e)
         {
+            string endpoint2;
             bool IsValidJson1;
             _lstDataItem = new List<string>();
-            _lstDataItem.Clear();                       // check it  ( it was changed )
-
+            _lstDataItem.Clear();
+            //object strResponse2;
             ConsumeRest cRest = new ConsumeRest();
+            //List<FullNames> fullName;
 
             object strResponse;
+            Address address = new Address();
 
-            string endpoint = "http://192.168.2.3:54240/api/YOURCONTROLLER/" + PerID;     //Contacts"
-            strResponse = cRest.makeRequest(endpoint);
+            if (IsDoctor == false)
+            {
+                endpoint2 = address.Endpoint + "PatientFriends/" + myID;
+            }
+            else
+            {
+                endpoint2 = address.Endpoint + "DoctorFriends/" + myID;
+            }
+
+            strResponse = cRest.makeRequest(endpoint2);
             ValidateJson validateJson = new ValidateJson();
             IsValidJson1 = validateJson.IsValidJson(strResponse);
 
             if (IsValidJson1)
             {
-                List<ContactsPerson> deserializedContacts = JsonConvert.DeserializeObject<List<ContactsPerson>>(strResponse.ToString());
-                //Number = deserializedContacts.Count;
+                deserializedContacts = JsonConvert.DeserializeObject<List<friends>>(strResponse.ToString());
                 for (int i = 0; i < deserializedContacts.Count; i++)
                 {
                     string NAME = deserializedContacts[i].FirstName + " " + deserializedContacts[i].LastName;
+
                     _lstDataItem.Add(NAME);
-                    selectChoice.Add(new SelectChoice
-                    {
-                        PersonId = deserializedContacts[i].PersonId,
-                        Contactid = deserializedContacts[i].Contactid,
-                        FullName = deserializedContacts[i].FirstName + " " + deserializedContacts[i].LastName
-                    });
+                    
                 }
+               
                 var dlgAlert = (new AlertDialog.Builder(this)).Create();
-                dlgAlert.SetTitle("Select Doctor");
+                dlgAlert.SetTitle("Select Person");
                 var listView = new ListView(this);
                 listView.Adapter = new EHR_Application.AlertListViewAdapter(this, _lstDataItem);         // changed
                 listView.ItemClick += listViewItemClick;
@@ -181,23 +277,31 @@ namespace EHR_Application
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
                .SetMessage("No data found due to unexpected problem" + "n/" + strResponse)
+               .SetIcon(Resource.Drawable.error)
                .Show();
             }
         }
-
+        
         void listViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Toast.MakeText(this, "you clicked on " + _lstDataItem[e.Position], ToastLength.Short).Show();
             Name = _lstDataItem[e.Position];
-            for (int i = 0; i < selectChoice.Count; i++)
+            int Location = e.Position;
+
+            //////////////////////////////////////////////   check this
+            receiverID = deserializedContacts[e.Position].PersonID;
+            //////////////////////////////////////////////    end of check
+
+
+            for (int i = 0; i < deserializedContacts.Count; i++)
             {
-                if (Name == selectChoice[i].FullName)
+                if (deserializedContacts[i].FirstName + " " + deserializedContacts[i].LastName == Name)
                 {
-                    ConID = selectChoice[i].Contactid;
+                    receiverID = deserializedContacts[i].PersonID;
                 }
             }
-        
         }
+
         void handllerNotingButton(object sender, DialogClickEventArgs e)
         {
             AlertDialog objAlertDialog = sender as AlertDialog;
@@ -215,7 +319,32 @@ namespace EHR_Application
         private void Button_Click(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(Photo2Activity));
+            intent.PutExtra("myID", myID);
+            intent.PutExtra("receiverID", receiverID);
             StartActivity(intent);
         }
+
+        public void AlertBox()
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Confirm Exit");
+            alert.SetMessage("Do you really want to exit? ");
+            alert.SetPositiveButton("Exit", (senderAlert, args) => {
+                // Toast.MakeText(this, "Deleted!", ToastLength.Short).Show();
+                Finish1();
+            });
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                Toast.MakeText(this, "Cancelled!", ToastLength.Short).Show();
+            });
+            Dialog dialog = alert.Create();
+            dialog.Show();
+        }
+
+        public void Finish1()
+        {
+            Finish();
+            Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+        }
+
     }
 }

@@ -14,10 +14,20 @@
         android:id="@+id/imageView"
         android:layout_weight="9"
         android:layout_width="match_parent"
-        android:layout_height="500px" />
-    <Button
-        android:text="Return"
+        android:layout_height="300px" />
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Return" />
+        android:layout_height="130dp">
+        <Button
+            android:text="Return"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Return" />
+        <Button
+            android:text="Cancel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Cancel" />
+    </LinearLayout>
 </LinearLayout>

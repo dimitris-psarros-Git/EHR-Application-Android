@@ -14,13 +14,9 @@ namespace EHR_Application
 {
     class ReceivedMessages
     {
-      
         public int id { get; set; }
-        public int PersonID { get; set; }
-        public int ReseiverID { get; set; }
         public string Text { get; set; }
-        public string Date { get; set; }
-        public bool IsMe { get; set; }
-
+        public DateTime? Date { get; set; }
+        public int? IsMe { get; set; }
     }
 }

@@ -12,7 +12,7 @@
             android:text="Send Photo "
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
-            android:layout_height="60px"
+            android:layout_height="match_parent"
             android:id="@+id/txt1" />
     </LinearLayout>
     <TextView
@@ -23,13 +23,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="120px"
         android:id="@+id/linearLayout9">
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceLarge"
+        <EditText
             android:layout_width="580px"
             android:layout_height="match_parent"
-            android:id="@+id/txt8" />
+            android:id="@+id/editTxt1" />
         <Button
             android:text="Send"
             android:layout_width="wrap_content"
@@ -46,7 +45,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="122px"
         android:id="@+id/linearLayout2">
         <Button
             android:text="Take a Photo"
@@ -68,12 +67,12 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="47dp"
         android:id="@+id/linearLayout3">
         <TextView
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
-            android:layout_height="60px"
+            android:layout_height="match_parent"
             android:id="@+id/textView5"
             android:text="Send Text" />
         <LinearLayout
@@ -107,7 +106,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="120px"
         android:id="@+id/linearLayout5">
         <EditText
             android:layout_width="580px"
@@ -126,34 +125,22 @@
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
-        android:minHeight="100px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout7" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout10" />
     <Button
-        android:text="Reselect Doctor"
-        android:layout_width="match_parent"
+        android:text="Reselect Reciever"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:id="@+id/Reselect" />
-    <Button
-        android:text="Send  Data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray" />
     <Button
         android:text="previousConversetios"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:id="@+id/button6" />
 </LinearLayout>

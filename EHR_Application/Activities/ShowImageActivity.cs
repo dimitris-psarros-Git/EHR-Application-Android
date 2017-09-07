@@ -33,10 +33,10 @@ namespace EHR_Application.Activities
             ConsumeRest cRest = new ConsumeRest();
 
             object strResponse;
-
-            string endpoint = "http://192.168.2.3:54240/api/DataSenders/2052";
-
-            //string endpoint = "http://192.168.2.3:54240/api/Dat/2059";
+            Address address = new Address();
+            string endpoint = address.Endpoint + "DataSenders/2052";
+            //string endpoint = "http://192.168.2.6:54240/api/DataSenders/2052";
+            //string endpoint = "http://192.168.2.6:54240/api/Dat/2059";
 
             strResponse = cRest.makeRequest(endpoint);
 

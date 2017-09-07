@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+  <!--///showAsAction="always" ///-->
+  <item android:id="@+id/action_settings5" android:icon="@drawable/refresh" android:clickable="false" android:title="Health History"  showAsAction="always" />
+  <item android:id="@+id/action_settings4" android:icon="@drawable/refresh" android:clickable="false" android:title="Allergies/Reactions"  showAsAction="always" />
+  <item android:id="@+id/action_settings"  android:icon="@drawable/refresh" android:clickable="false" android:title="Send Data " showAsAction="always" />
+  <item android:id="@+id/action_settings1" android:icon="@drawable/refresh" android:clickable="false" android:title="Messages" showAsAction="always" />
+  <item android:id="@+id/action_settings6" android:icon="@drawable/refresh" android:clickable="false" android:title="Photos" showAsAction="always" />
+  <item android:id="@+id/action_settings7" android:icon="@drawable/refresh" android:clickable="false" android:title="See Contacts" showAsAction="always" />
+  <item android:id="@+id/action_settings9" android:icon="@drawable/refresh" android:clickable="false" android:title="New Messages" showAsAction="always" />
+  <item android:id="@+id/action_settings8" android:icon="@drawable/refresh" android:clickable="false" android:title="Tasks" showAsAction="always" />
+  <item android:id="@+id/action_settings2" android:icon="@drawable/refresh" android:clickable="false" android:title="Exit" showAsAction="always" />
+  <!--/android:showAsAction="ifRoom"/-->
+  <item android:id="@+id/action_settings3" android:clickable="false" android:title="Reload" android:showAsAction="ifRoom" />
+</menu>
