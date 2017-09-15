@@ -12,10 +12,10 @@ using Android.Widget;
 
 namespace EHR_Application.Models
 {
-    class Visit2
+    class ContactsPerson6
     {
-        public Doctor2 Doctor { get; set; }
-        public int VisitID { get; set; }
-        public DateTime? Date { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

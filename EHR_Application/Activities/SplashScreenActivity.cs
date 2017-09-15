@@ -16,7 +16,7 @@ using System.Timers;
 
 namespace EHR_Application.Activities
 {
-    [Activity(Label = "  Wellcome ", MainLauncher=true , Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar" )]
+    [Activity(Label = "  Wellcome " /*, MainLauncher=true*/ , Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar" )]
     public class SplashScreenActivity : AppCompatActivity
     {
         private ProgressBar progressBar;
@@ -25,7 +25,7 @@ namespace EHR_Application.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.splashsreenlayout);
-            progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar);
+            //progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar);
          
             Timer timer = new Timer();
             timer.Interval = 3000;

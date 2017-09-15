@@ -14,39 +14,59 @@ using Newtonsoft.Json;
 
 namespace EHR_Application.Activities
 {
-    [Activity(Label = "   Add New History "  /*, MainLauncher = true*/ )]
+    [Activity(Label = "   Add New History " , Theme = "@style/MyTheme" , MainLauncher = true )]
     public class NewVisitActivity : Activity
     {
+        List<string> ICD_Codes,ICD_Codes1;
+        Spinner spin;
+        Spinner spin1;
         EditText Description;
         EditText ICDcode;
         EditText ATCcode;
         EditText Dosage;
         int myID,receiverID, VISITID;
         VisitID newMessages;
-
+        ArrayAdapter adapt;
+        ArrayAdapter adapt1;
+        List<icdChapters> icdchapters;
+        List<icd_codes> icdcodes,icdcodesspecial;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.newVisit);
 
-
             //myID = Intent.GetIntExtra("myID", -1);
             //receiverID = Intent.GetIntExtra("receiverID", -1);
+
+            spin1 = FindViewById<Spinner>(Resource.Id.spinner2);
+            spin  = FindViewById<Spinner>(Resource.Id.spinner1);
 
             Button button1 = FindViewById<Button>(Resource.Id.button1);
             button1.Click += Button1_Click;
 
-           // Button button2 = FindViewById<Button>(Resource.Id.button2);
-           // button1.Click += Button1_Click1;
+            //Button button2 = FindViewById<Button>(Resource.Id.button2);
+            //button1.Click += Button1_Click1;
 
             Button button3 = FindViewById<Button>(Resource.Id.button3);
             button3.Click += Button3_Click;
 
-            Description = FindViewById<EditText>(Resource.Id.editText1);
-            ICDcode = FindViewById<EditText>(Resource.Id.editText2);
+            //Description = FindViewById<EditText>(Resource.Id.editText1);
+            //ICDcode = FindViewById<EditText>(Resource.Id.editText2);
             ATCcode = FindViewById<EditText>(Resource.Id.editText3);
             Dosage = FindViewById<EditText>(Resource.Id.editText4);
+
+            Actions();
+
+            //spin.ItemClick += Spin_ItemClick;
+            spin.ItemSelected += Spin_ItemSelected;
+        }
+
+        private void Spin_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            string Chapter = icdchapters[e.Position].col1;
+            icdcodesspecial = icdcodes.Where(c => (c.col4.ToString() == Chapter)).ToList();
+            SetIcdCodes();
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -54,7 +74,86 @@ namespace EHR_Application.Activities
             AddNewVisit();
         }
 
-        private async void AddNewVisit()
+        private void Actions()
+        {
+            List<string> ICD_Chapters = new List<string>();
+            ICD_Codes = new List<string>();
+            ICD_Codes1 = new List<string>();
+            ConsumeRest cRest = new ConsumeRest();
+            ValidateJson validateJson = new ValidateJson();
+            Address address = new Address();
+            object strResponse,strResponse2;
+            bool IsValidJson,IsValidJson2;
+            string endpoint,endpoint2;
+            
+            endpoint = address.Endpoint + "icd_chapters";
+            endpoint2 = address.Endpoint + "icd_code";
+
+            strResponse = cRest.makeRequest(endpoint);
+            IsValidJson = validateJson.IsValidJson(strResponse);
+            strResponse2 = cRest.makeRequest(endpoint2);
+            IsValidJson2 = validateJson.IsValidJson(strResponse2);
+
+            if (IsValidJson && IsValidJson2)
+            {
+                icdchapters = JsonConvert.DeserializeObject<List<icdChapters>>(strResponse.ToString());
+                icdcodes    = JsonConvert.DeserializeObject<List<icd_codes>>(strResponse2.ToString());
+
+                if (icdchapters.Count != 0)
+                {
+                    for (int i = 0; i < icdchapters.Count; i++)
+                    {
+                        ICD_Chapters.Add(icdchapters[i].col2.ToString());
+
+                    }
+                    adapt = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, ICD_Chapters);
+                    spin.Adapter = adapt;
+                }
+
+                //icdcodesspecial = icdcodes;
+
+                if (icdcodes.Count != 0)
+                {
+                    for (int i = 0; i < icdcodes.Count; i++)
+                    {
+                        ICD_Codes.Add(icdcodes[i].col4.ToString()+". "+icdcodes[i].col9.ToString());
+                    }
+                    adapt1 = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, ICD_Codes);
+                    spin1.Adapter = adapt1;
+                }
+            }
+            else
+            {
+                new AlertDialog.Builder(this)
+               .SetTitle("An error has occured")
+               .SetMessage("No data found due to unexpected problem" + "n/" + strResponse)
+               .Show();
+            }
+        }
+
+        private void SetIcdCodes()
+        {
+            //spin1.Adapter(null);
+            
+            if (icdcodesspecial.Count != 0)
+            {
+                for (int i = 0; i < icdcodesspecial.Count; i++)
+                {
+                    ICD_Codes1.Add(icdcodesspecial[i].col4.ToString() + " " + icdcodesspecial[i].col9.ToString());
+                }
+                adapt1 = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, ICD_Codes1);
+                spin1.Adapter = adapt1;
+            }
+        }
+
+        private void Spin_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            string Chapter = icdchapters[e.Position].col1;
+            icdcodesspecial = icdcodes.Where(c => (c.col4.ToString() == Chapter)).ToList();
+            SetIcdCodes();
+        }
+
+        private async void AddNewVisit()    // new visit
         {
             myID = 10000;
             receiverID = 1000;
@@ -82,7 +181,7 @@ namespace EHR_Application.Activities
             }
         }
 
-        private async void Button1_Click1(object sender, EventArgs e)
+        private async void Button1_Click1(object sender, EventArgs e)  // new Diagnosis
         {
             if (VISITID != 0 && Description.Text!= null && ICDcode.Text!= null ) {
                 string endpoint1;
@@ -119,7 +218,7 @@ namespace EHR_Application.Activities
             }
         }
 
-        private async  void Button1_Click(object sender, EventArgs e)
+        private async  void Button1_Click(object sender, EventArgs e)    // new Treatment
         {
             if ( VISITID!=0 && ATCcode!=null && Dosage!= null) {
                 string endpoint2;

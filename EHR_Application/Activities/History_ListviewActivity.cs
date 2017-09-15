@@ -17,13 +17,13 @@ using EHR_Application.Models;
 
 namespace EHR_Application
 {
-    [Activity(Label = "    Medical History  "/*, Theme = "@style/MyTheme1"*/, Theme = "@style/MyTheme")]
+    [Activity(Label = "    Medical History  ", /*, Theme = "@style/MyTheme1"*/ Theme = "@style/MyTheme")]
 
     public class History_ListviewActivity :  AppCompatActivity         // prososxh edw 
     {
         int myID,receiverID;
         int SpecVisitId;
-        bool IsValid;
+        bool IsValid,IsDoctor;
         object strResponse;
         ExpandableListViewAdapter mAdapter;
         ExpandableListView expandableListView;
@@ -83,8 +83,13 @@ namespace EHR_Application
             string endpoint;
             ConsumeRest cRest = new ConsumeRest();
             Address address = new Address();
-            
-            endpoint = address.Endpoint2 + "visits//?PersonId=" + myID;           
+
+            RetrieveData retrieve = new RetrieveData();  // retrieve "IsDoctor"
+            IsDoctor = retrieve.RetreiveBool();
+
+            if (IsDoctor == false) { endpoint = address.Endpoint2 + "visits//?PersonId=" + myID; }       
+            else                   { endpoint = address.Endpoint2 + "visits//?PersonId=" + receiverID; }
+
             strResponse = cRest.makeRequest(endpoint);
 
             ValidateJson validateJson = new ValidateJson();
@@ -93,7 +98,8 @@ namespace EHR_Application
             if (IsValid)
             {
                 VISIT2 = JsonConvert.DeserializeObject<List<Visit2>>(strResponse.ToString());
-               
+                VISIT2 = VISIT2.OrderBy(i => i.Date).ToList();
+
                 //convertClasses();
                 SetData(out mAdapter);
                 expandableListView.SetAdapter(mAdapter);
@@ -128,6 +134,9 @@ namespace EHR_Application
                     SpecVisitId = VISIT2[i].VisitID;
                 }
                 string details_visitID1 = "@ Diagnosis VisitID :" + VISIT2[i].VisitID;
+                
+                int PositionOfFather    = e.GroupPosition;
+                int PositionOfSon       = e.ChildPosition;
             }
 
             if (NameOfChild.ToString() == " Diagnosis ")
@@ -145,11 +154,9 @@ namespace EHR_Application
                 StartActivity(activity1);
             }
         }
-
-
+        
         private void SetData(out ExpandableListViewAdapter mAdapter)
         {
-            int[] max = new int[100];
             int Visit_Count = VISIT2.Count;
             for (int i = 0; i < VISIT2.Count; i++)
             {
@@ -165,7 +172,6 @@ namespace EHR_Application
                     a.Add(" Medicines ");
                     group.Add("Visit " + i.ToString() + "   " + details_date);
                     dicMyMap.Add(group[i], a);
-                  
             }
             mAdapter = new ExpandableListViewAdapter(this, group, dicMyMap);
             
@@ -182,11 +188,9 @@ namespace EHR_Application
             //onoma tou patera
             Object NameOfFather = mAdapter.GetGroup(e.GroupPosition);
             
-
-            ////////////////////////////// add new code
             int SpecVisitId;
 
-            for (int i = 0; i < VISIT.Count; i++)                 /// diorthwma
+            for (int i = 0; i < VISIT.Count; i++)    // diorthwma
             {
                 string CreatedName = "Group-" + i.ToString();
                 
@@ -194,12 +198,9 @@ namespace EHR_Application
                 {
                   SpecVisitId = VISIT[i].VisitID;
                 }
-
                 string details_visitID1 = "@ Diagnosis VisitID :" + VISIT[i].VisitID;
-
             }
-            //////////////////////////////   end of new code
-
+           
                 if (NameOfChild.ToString() == "Click to see diagnosis")
                 {
                 var activity1 = new Intent(this, typeof(DiagnosisListViewActivity));

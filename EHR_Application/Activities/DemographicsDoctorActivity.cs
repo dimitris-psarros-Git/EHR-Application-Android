@@ -20,9 +20,6 @@ namespace EHR_Application.Activities
     public class DemographicsDoctorActivity : Activity
     {
         int myID;
-        //ArrayAdapter adapt;
-        //ArrayAdapter adapt1;
-
         TextView txtFirstName;
         TextView txtLastName;
         TextView txtSpeciality;
@@ -31,12 +28,9 @@ namespace EHR_Application.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.DemographicDoctor);
+
+
             myID = Intent.GetIntExtra("myID", -1);
-            
-            /////////////////////     auta prepei na svistoun
-            //myID = 10000;
-            //SaveBool(true);
-            ////////////////////     telos auta pou prepei na svistoun
             
             txtFirstName  = FindViewById<TextView>(Resource.Id.txtFirstName);
             txtLastName   = FindViewById<TextView>(Resource.Id.txtLastName);
@@ -44,21 +38,7 @@ namespace EHR_Application.Activities
 
             Actions();
         }
-
-
-        /////////////////////////////////////////// ayto prepei na svistei
-        //protected void SaveBool(bool IsDoctor)         // save if it is Doctor or Patient
-        //{
-        //    Context mContext = Android.App.Application.Context;
-        //    ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(mContext);
-        //    ISharedPreferencesEditor editor = prefs.Edit();
-        //    editor.PutBoolean("Is_Doctor", IsDoctor);
-        //    // editor.Commit();    // applies changes synchronously on older APIs
-        //    editor.Apply();
-        //}
-        //////////////////////////////////////////// telos auto pou prepei na svistei
-
-
+        
         #region MenuInflater
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -97,9 +77,9 @@ namespace EHR_Application.Activities
                 StartActivity(intent);
                 return true;
             }
-            else if (id == Resource.Id.action_settings)
+            else if (id == Resource.Id.action_settings10)
             {
-                Toast.MakeText(this, "Send Data", ToastLength.Short).Show();
+                Toast.MakeText(this, "Allergy", ToastLength.Short).Show();
                 var intent = new Intent(this, typeof(ListviewContactsActivity));
                 intent.PutExtra("Allergy", true);
                 StartActivity(intent);
@@ -114,12 +94,11 @@ namespace EHR_Application.Activities
                 StartActivity(intent);
                 return true;
             }
-            else if (id == Resource.Id.action_settings1)
+            else if (id == Resource.Id.action_settings13)
             {
-                Toast.MakeText(this, "PatientsData", ToastLength.Short).Show();
-                var intent = new Intent(this, typeof(ListviewContactsActivity));
+                Toast.MakeText(this, " New Images ", ToastLength.Short).Show();
+                var intent = new Intent(this, typeof(NewImagesActivity));
                 intent.PutExtra("myID", myID);
-                intent.PutExtra("patientData", true);
                 StartActivity(intent);
                 return true;
             }
@@ -169,9 +148,8 @@ namespace EHR_Application.Activities
             bool IsValidJson;
             object strResponse;
             string endpoint;
-
-
-            endpoint = address.Endpoint + "Doctors/" + 10000;//myID;
+            
+                endpoint = address.Endpoint + "Doctors/" + myID;
                 strResponse = cRest.makeRequest(endpoint);
                 IsValidJson = validateJson.IsValidJson(strResponse);
 
@@ -189,14 +167,11 @@ namespace EHR_Application.Activities
                       .Show();
                 }
         }
-
+        
 
         #region ListView AlertDialog
-        //List<SelectChoice> selectChoice = new List<SelectChoice>();
-        //List<Tuple<int, string>> mylist = new List<Tuple<int, string>>();
+
         List<string> _lstDataItem;   
-        //int Number;
-        
         void methodInvokeAlertDialogWithListView()
         {
             string endpoint;
@@ -216,8 +191,7 @@ namespace EHR_Application.Activities
             if (IsValidJson1)
             {
                 List<friends> deserializedContacts = JsonConvert.DeserializeObject<List<friends>>(strResponse.ToString());
-
-                //Number = deserializedContacts.Count;
+                
                 for (int i = 0; i < deserializedContacts.Count; i++)
                 {
                     string NAME = deserializedContacts[i].FirstName + " " + deserializedContacts[i].LastName;
@@ -248,9 +222,7 @@ namespace EHR_Application.Activities
             Toast.MakeText(this, "you clicked on " + btnClicked.Text, ToastLength.Long).Show();
         }
         #endregion
-
-
-        /// /////////////////////////////////////////////////////////////    add new code 
+        
         #region
         List<friends> deserializedContacts3;
         void methodInvokeAlertDialogWithListView3()
@@ -262,7 +234,7 @@ namespace EHR_Application.Activities
             _lstDataItem.Clear();
             ConsumeRest cRest = new ConsumeRest();
             Address address = new Address();
-            myID = 10000;
+
             endpoint = address.Endpoint + "DoctorFriends/" + myID;
 
             strResponse = cRest.makeRequest(endpoint);
@@ -272,8 +244,7 @@ namespace EHR_Application.Activities
             if (IsValidJson1)
             {
                 deserializedContacts3 = JsonConvert.DeserializeObject<List<friends>>(strResponse.ToString());
-
-                //Number = deserializedContacts.Count;
+                
                 for (int i = 0; i < deserializedContacts3.Count; i++)
                 {
                     string NAME = deserializedContacts3[i].FirstName + " " + deserializedContacts3[i].LastName;
@@ -305,7 +276,7 @@ namespace EHR_Application.Activities
 
             Toast.MakeText(this, "you clicked on " + _lstDataItem[e.Position], ToastLength.Short).Show();
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.SetTitle( "Patient : " + deserializedContacts3[e.Position].FirstName + deserializedContacts3[e.Position].LastName );
+            alert.SetTitle( "Patient : " + deserializedContacts3[e.Position].FirstName+" "+ deserializedContacts3[e.Position].LastName );
             alert.SetMessage(Personaldata);
             alert.SetCancelable(true);
             Dialog dialog = alert.Create();
@@ -313,9 +284,7 @@ namespace EHR_Application.Activities
             
         }
         #endregion
-        ///////////////////////////////////////////////////////////////////   end of new code
-
-        ///////////////////////////////////////////////////////////////////    add new code
+       
         #region ListView AlertDialog
         List<string> _lstDataItem2;
         List<NewMessages2> deserializedContacts, receivedMes;
@@ -369,11 +338,13 @@ namespace EHR_Application.Activities
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.SetTitle(receivedMes[e.Position].FirstName + "  " + receivedMes[e.Position].LastName);
             alert.SetMessage(receivedMes[e.Position].Text);
-            alert.SetIcon(Resource.Drawable.message);
+            alert.SetIcon(Resource.Drawable.messageImage);
             alert.SetCancelable(true);
             Dialog dialog = alert.Create();
             dialog.Show();
-            DeleteFromNew(receivedMes[e.Position].DataSenderID);
+
+            RetrieveData RD = new RetrieveData();
+            RD.DeleteFromNew(receivedMes[e.Position].DataSenderID);
         }
 
         void handllerNotingButton1(object sender, DialogClickEventArgs e)
@@ -383,25 +354,35 @@ namespace EHR_Application.Activities
             Toast.MakeText(this, "you clicked on " + btnClicked.Text, ToastLength.Long).Show();
         }
         #endregion
-        ////////////////////////////////////////////////////////////////    end of new code
+       
 
-        private async void DeleteFromNew(int datasendID)
+        //private async void DeleteFromNew(int datasendID)
+        //{
+        //    Address address = new Address();
+        //    PutRest putrest = new PutRest();
+        //    string endpoint3;
+
+        //    endpoint3 = address.Endpoint + "DataSenders/" + datasendID;
+        //    var uri = new Uri(endpoint3);
+
+        //    NewMessages newmessages = new NewMessages();
+        //    newmessages.DataSenderID = datasendID;
+        //    newmessages.Seen = true;
+
+        //    string output = JsonConvert.SerializeObject(newmessages);
+        //    var StrRespPost = await PutRest.Put(output, uri);
+        //}
+        
+        private string PersonalData(int? PersonID)
         {
+            ConsumeRest cRest = new ConsumeRest();
             Address address = new Address();
-            PutRest putrest = new PutRest();
-            string endpoint3;
-
-            endpoint3 = address.Endpoint + "DataSenders/" + datasendID;
-            var uri = new Uri(endpoint3);
-
-            NewMessages newmessages = new NewMessages();
-            newmessages.DataSenderID = datasendID;
-            newmessages.Seen = true;
-
-            string output = JsonConvert.SerializeObject(newmessages);
-            var StrRespPost = await PutRest.Put(output, uri);
+            string endpoint = address.Endpoint + "Demographics/" + PersonID; 
+            object strResponse = cRest.makeRequest(endpoint);
+            demographics demogra = JsonConvert.DeserializeObject<demographics>(strResponse.ToString());
+            string info = "FirstName : "+ demogra.FirstName +"\n"+"LastName : "+ demogra.LastName +"\n" +"Gender : "+demogra.Sex +"\n"+ "Living place : "+demogra.Country +" "+demogra.City +"\n"+ "Dieuthinsh : " + demogra.StreetName +" " + demogra.StreetNumber +"\n"+"Birthday : "+ demogra.Birthday;
+            return info;
         }
-
 
         public void AlertBox()
         {
@@ -409,7 +390,7 @@ namespace EHR_Application.Activities
             alert.SetTitle("Confirm Exit");
             alert.SetMessage("Do you really want to exit? ");
             alert.SetPositiveButton("Exit", (senderAlert, args) => {
-            Finish1();
+                Finish1();
             });
             alert.SetNegativeButton("Cancel", (senderAlert, args) => {
                 Toast.MakeText(this, "Cancelled!", ToastLength.Short).Show();
@@ -423,18 +404,5 @@ namespace EHR_Application.Activities
             Finish();
             Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
         }
-
-        public string PersonalData(int? PersonID)
-        {
-            ConsumeRest cRest = new ConsumeRest();
-            Address address = new Address();
-            demographics demogr;
-            string endpoint = address.Endpoint + "Demographics/" + PersonID;//myID;
-            object strResponse = cRest.makeRequest(endpoint);
-            demographics demogra = JsonConvert.DeserializeObject<demographics>(strResponse.ToString());
-            string info ="FullName: "+ demogra.FirstName + " " + demogra.LastName +"\n" + "Dieuthinsh :"+demogra.City+ " " + demogra.StreetName+ " "+ demogra.StreetNumber;
-            return info;
-        }
-
     }
 }

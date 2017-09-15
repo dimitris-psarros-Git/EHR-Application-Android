@@ -15,7 +15,7 @@ using Android.Graphics;
 
 namespace EHR_Application
 {
-    [Activity(Label = "FindPictureGallery")]
+    [Activity(Label = "   FindPictureGallery  ")]
     public class FindPictureGalleryActivity : Activity
     {
         Bitmap bitmap;

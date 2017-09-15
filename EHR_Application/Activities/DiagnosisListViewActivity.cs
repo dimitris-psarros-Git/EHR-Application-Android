@@ -19,15 +19,16 @@ namespace EHR_Application.Activities
     [Activity(Label = "      Diagnosis   ", Theme = "@style/MyTheme")]
     public class DiagnosisListViewActivity : AppCompatActivity
     {
-        int FatherID,VisitID;
+        Dictionary<string, List<string>> dicMyMap = new Dictionary<string, List<string>>();
+        int VisitID;
+        string Father;
         object strResponse;
         ExpandableListViewAdapter mAdapter;
         ExpandableListView expandableListView;
         List<string> group = new List<string>();
         List<DIagnosis> Diagnosis;
-        Dictionary<string, List<string>> dicMyMap = new Dictionary<string, List<string>>();
+       
 
-        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             bool IsValid;
@@ -36,7 +37,7 @@ namespace EHR_Application.Activities
             SetContentView(Resource.Layout.Main2);
 
             // Data from previous activity
-            FatherID = Intent.GetIntExtra("MyData", -1);
+            Father = Intent.GetStringExtra("MyData");
             VisitID = Intent.GetIntExtra("VisitID",-1);
 
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
@@ -50,7 +51,6 @@ namespace EHR_Application.Activities
             string endpoint = address.Endpoint + "Diagnosi/" + VisitID ;
             strResponse = cRest.makeRequest(endpoint);
            
-
             ValidateJson validateJson = new ValidateJson();
             IsValid = validateJson.IsValidJson(strResponse);
             
@@ -97,7 +97,6 @@ namespace EHR_Application.Activities
 
         private void SetData(out ExpandableListViewAdapter mAdapter)
         {
-            //int[] max = new int[100];
             int Visit_Count = Diagnosis.Count;
             for (int i = 0; i < Diagnosis.Count; i++)
             {
@@ -126,7 +125,6 @@ namespace EHR_Application.Activities
             alert.SetTitle("Confirm Exit");
             alert.SetMessage("Do you really want to exit? ");
             alert.SetPositiveButton("Exit", (senderAlert, args) => {
-                // Toast.MakeText(this, "Deleted!", ToastLength.Short).Show();
                 Finish1();
             });
             alert.SetNegativeButton("Cancel", (senderAlert, args) => {

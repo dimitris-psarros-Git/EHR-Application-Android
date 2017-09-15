@@ -15,7 +15,7 @@ using Android.Preferences;
 
 namespace EHR_Application.Activities
 {
-    [Activity(Label = "     Contacts  ")]
+    [Activity(Label = "     Contacts  ", Theme = "@style/MyTheme1")]
     public class ListviewContactsActivity : Activity
     {
         public static List<ContactsPerson2> ContactsPer { get; private set; }
@@ -53,21 +53,15 @@ namespace EHR_Application.Activities
             myList = FindViewById<ListView>(Resource.Id.listView);
             Cadapter = new CustomAdapter2(contactsPerson2);
 
-            IsDoctor = RetrieveBool();
+            RetrieveData retrieve = new RetrieveData();  // retrieve "IsDoctor"
+            IsDoctor = retrieve.RetreiveBool();
+
             Actions();
 
             myList.Adapter = new CustomAdapter2(contactsPerson2);  
             myList.ItemClick += MyList_ItemClick;
         }
        
-        private bool RetrieveBool()
-        {
-            Context mContext = Android.App.Application.Context;
-            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(mContext);
-            bool mBool = prefs.GetBoolean("Is_Doctor", false);
-            return mBool;
-        }
-
         List<FullNames> fullnameList1 = new List<FullNames>();
         private void Actions()
         {
@@ -76,14 +70,8 @@ namespace EHR_Application.Activities
             string endpoint;
             Address address = new Address();
            
-            if (IsDoctor == false)
-            {
-                endpoint = address.Endpoint + "PatientFriends/" + myID;
-            }
-            else
-            {
-                endpoint = address.Endpoint + "DoctorFriends/" + myID;
-            }
+            if (IsDoctor == false) { endpoint = address.Endpoint + "PatientFriends/" + myID; }
+            else                   { endpoint = address.Endpoint + "DoctorFriends/"  + myID; }
             strResponse = cRest.makeRequest(endpoint);
 
             ValidateJson validateJson = new ValidateJson();
@@ -92,6 +80,14 @@ namespace EHR_Application.Activities
             if (IsValidJson1)
             {
                 deserializedFriends = JsonConvert.DeserializeObject<List<friends>>(strResponse.ToString());
+                deserializedFriends = deserializedFriends.OrderBy(i => i.FirstName).ToList();
+            }
+            else
+            {
+                new AlertDialog.Builder(this)
+                .SetTitle("An error has occured")
+                .SetMessage("No data found due to unexpected problem")
+                .Show();
             }
             SetData();
         }
@@ -123,23 +119,21 @@ namespace EHR_Application.Activities
             int NumbPressed = (int)Cadapter.GetItemId(e.Position);
             Toast.MakeText(this, "You Pressed : " + contactsPerson2[NumbPressed].FirstName + contactsPerson2[NumbPressed].LastName, ToastLength.Short).Show();
 
-            string firstNameContact = contactsPerson2[NumbPressed].FirstName;
-            string lastNameContact = contactsPerson2[NumbPressed].LastName;
+            //string firstNameContact = contactsPerson2[NumbPressed].FirstName;
+            //string lastNameContact = contactsPerson2[NumbPressed].LastName;
             
-            ////////////////////////////////////////////////     third approach
-            for (int i = 0; i < deserializedFriends.Count; i++)
-            {
-                if ((firstNameContact.ToString() + lastNameContact.ToString()) == (deserializedFriends[i].FirstName + deserializedFriends[i].LastName))
-                {
-                    receiverID = deserializedFriends[i].PersonID;
-                }
-            }
-            ////////////////////////////////////////////////     end of third approach
-
-            /////////////////////////////////   new approach
+            //////////////////////////////////////////////////     third approach
+            //for (int i = 0; i < deserializedFriends.Count; i++)
+            //{
+            //    if ((firstNameContact.ToString() + lastNameContact.ToString()) == (deserializedFriends[i].FirstName + deserializedFriends[i].LastName))
+            //    {
+            //        receiverID = deserializedFriends[i].PersonID;
+            //    }
+            //}
+            //////////////////////////////////////////////////     end of third approach
+            
             receiverID = deserializedFriends[e.Position].PersonID;
-            ////////////////////////////////   end new approach
-
+           
             if (receiverID != 0 )
             {
                 if (message)
@@ -151,7 +145,7 @@ namespace EHR_Application.Activities
                 }
                 if (photo)
                 {
-                    var intent = new Intent(this, typeof(ListviewContactsActivity));
+                    var intent = new Intent(this, typeof(ImagesActivity));
                     intent.PutExtra("myID", myID);
                     intent.PutExtra("ConnectID", receiverID);
                     StartActivity(intent);
@@ -167,20 +161,14 @@ namespace EHR_Application.Activities
                 {
                     var intent = new Intent(this, typeof(History_ListviewActivity));
                     intent.PutExtra("myID", receiverID);
-                    //intent.PutExtra("receiverID", receiverID);
-                    StartActivity(intent);
-                }
-                if (patientData)   // mono otan syndethei giatros
-                {
-                    var intent = new Intent(this, typeof(DemographicsDataActivity));
-                    intent.PutExtra("myID", myID);
                     intent.PutExtra("receiverID", receiverID);
                     StartActivity(intent);
                 }
                 if (Allergy)   // mono otan syndethei giatros
                 {
-                    var intent = new Intent(this, typeof(DemographicsDataActivity));
+                    var intent = new Intent(this, typeof(AllergiesActivity));
                     intent.PutExtra("myID", receiverID);
+                    intent.PutExtra("receiverID", receiverID);
                     StartActivity(intent);
                 }
                 if (newvisit)

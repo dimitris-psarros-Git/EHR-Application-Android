@@ -18,7 +18,6 @@ using System.Drawing;
 
 namespace EHR_Application
 {
-
     public enum httpVerb1
     {
         GET,
@@ -26,8 +25,7 @@ namespace EHR_Application
         PUT,
         DELETE
     }
-
-
+    
     class ConsumeRest
     {
         public string endPoint { get; set; }
@@ -49,12 +47,7 @@ namespace EHR_Application
             {
                 WebRequest webRequest1 = WebRequest.Create(endpoint);
                 WebResponse webResponse;
-                
                 webResponse = webRequest1.GetResponse();
-
-                ////////////////////   check this new code  
-                //Image webImage = Image.FromStream(webResponse.GetResponseStream());
-                ////////////////////    end of new code
 
                 using (Stream responseStream = webResponse.GetResponseStream())
                 {
@@ -63,43 +56,40 @@ namespace EHR_Application
                                 strResponceValue = reader.ReadToEnd();
                             }
                 }
-              
-               
-                     //Otherwise with HttpWebRequest
-               // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
-               // request.Method = httpMethod.ToString();
-               ////  request.Accept = "application/json";
-               // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-               // if (response.StatusCode == HttpStatusCode.OK)
-               // {
-               //     //  throw new ApplicationException("error code:" + response.StatusCode.ToString());
-
-               //     using (Stream responseStream = response.GetResponseStream())
-               //     {
-               //         using (StreamReader reader = new StreamReader(responseStream))
-               //         {
-               //             strResponceValue = reader.ReadToEnd();
-               //         }
-               //     }
-               //     // response.Close();
-               // }
-               
                 return strResponceValue;
+                #region HttpRequest
+                //Otherwise with HttpWebRequest
+                // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
+                //request.Method = httpMethod.ToString();
+                ////  request.Accept = "application/json";
+                //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                //if (response.StatusCode == HttpStatusCode.OK)
+                //{
+                //    //  throw new ApplicationException("error code:" + response.StatusCode.ToString());
+
+                //    using (Stream responseStream = response.GetResponseStream())
+                //    {
+                //        using (StreamReader reader = new StreamReader(responseStream))
+                //        {
+                //            strResponceValue = reader.ReadToEnd();
+                //        }
+                //    }
+                //    // response.Close();
+                //}
+               #endregion
             }
             catch (WebException e)
             {
                 if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                   //MessageBox.Show("Status Code : ", ((HttpWebResponse)e.Response).StatusCode);
-                   //main.Print(/*"Status Description : ",*/ ((HttpWebResponse)e.Response).StatusDescription);
-                }
-                // Mporeis na guriseis e.Status , e.Response.StatusDescription , e.Responce.StatusCode 
-                return e.Message.ToString();
+                   //Status Code:        ((HttpWebResponse)e.Response).StatusCode)
+                   //Status Description: ((HttpWebResponse)e.Response).StatusDescription);
+                } 
+                return e.Message.ToString(); //e.Status , e.Response.StatusDescription , e.Responce.StatusCode
+
             }
             catch (Exception e)
             {
-              
-       //         main.Print(/*"\nThe following Exception was raised : "+ */ e.Message);
                 return e.Message.ToString() ;
             }
         }

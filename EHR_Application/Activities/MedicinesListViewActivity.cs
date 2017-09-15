@@ -35,13 +35,13 @@ namespace EHR_Application.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main2);
 
-            // Data from previous activity
+            //Data from previous activity
             FatherID = Intent.GetIntExtra("MyData", -1);
-            VisitID = Intent.GetIntExtra("VisitID", -1);
+            VisitID =  Intent.GetIntExtra("VisitID", -1);
 
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
-            // SupportActionBar.Title = "Expandable ListView";
+            //SupportActionBar.Title = "Expandable ListView";
             expandableListView = FindViewById<ExpandableListView>(Resource.Id.expandableListView);
             
             ConsumeRest cRest = new ConsumeRest();
@@ -93,18 +93,18 @@ namespace EHR_Application.Activities
         }
         #endregion
         
-
         private void SetData(out ExpandableListViewAdapter mAdapter)
         {
-            //int[] max = new int[100];
             int Visit_Count = Medicines.Count;
             for (int i = 0; i < Medicines.Count; i++)
             {
                 string ATCcode = "ATC-CODE :" + Medicines[i].ATC_CODES;
                 string Dosage = " Dosage :" + Medicines[i].Dosage;
+
                 List<string> a = new List<string>();
                 a.Add(ATCcode);
                 a.Add(Dosage);
+
                 group.Add("Medicine: " + i.ToString());
                 dicMyMap.Add(group[i], a);
             }

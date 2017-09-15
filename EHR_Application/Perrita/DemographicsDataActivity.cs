@@ -108,7 +108,7 @@ namespace EHR_Application.Activities
                 txt24.Text = demogr.StreetName;
                 txt17.Text = demogr.StreetNumber.ToString();
                 txt18.Text = demogr.Sex;
-                txt19.Text = demogr.Birthday;
+                txt19.Text = demogr.Birthday.ToString();
             }
             else
             {

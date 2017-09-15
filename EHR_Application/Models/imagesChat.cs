@@ -15,6 +15,7 @@ namespace EHR_Application.Models
     class imagesChat
     {
         public byte[] Picture { get; set; }
-        public string Date { get; set; }
+        public DateTime? Date { get; set; }
+        public string Text { get; set; }
     }
 }

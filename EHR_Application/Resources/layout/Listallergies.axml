@@ -20,7 +20,7 @@
         <TextView
             android:text="Reaction"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="300px"
+            android:layout_width="340px"
             android:layout_height="match_parent"
             android:id="@+id/textView2"
             android:gravity="center" />

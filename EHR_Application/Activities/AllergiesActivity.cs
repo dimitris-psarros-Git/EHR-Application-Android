@@ -15,36 +15,33 @@ using Newtonsoft.Json;
 
 namespace EHR_Application.Activities
 {
-    [Activity(Label = "Allergies/Reactions" )]
+    [Activity(Label = "Allergies/Reactions", Theme = "@style/MyTheme")]
     public class AllergiesActivity : Activity
     {
         List<Allergies> deserializedAllergies;
         private List<Allergies> mItems;
         private ListView mListView;
-        int myID;
+        int myID,receivedID;
+        bool IsDoctor;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            myID = Intent.GetIntExtra("myID", -1);
+            RetrieveData retrieve = new RetrieveData();  // retrieve "IsDoctor"
+            IsDoctor = retrieve.RetreiveBool();
 
+            //Datafrom Previous Activity
+            myID = Intent.GetIntExtra("myID", -1);
+            receivedID = Intent.GetIntExtra("receiverID", -1);
+            
             SetContentView(Resource.Layout.Listallergies);
             mListView = FindViewById<ListView>(Resource.Id.AllergiesListView);
 
-            actions();
-
-            //mItems = new List<Allergies>();
-            //mItems.Add(new Allergies() { Allergy = "zampon", Reaction = "Redness, swelling, itching, allergic contact dermatitis reactions, stomatitis (inflammation and soreness of the mouth or tongue), cheilitis (inflammation, rash, or painful erosion of the lips, oropharyngeal mucosa, or angles of their mouth), pruritus, hand eczema, generalized or resistant plantar dermatitis, rhinitis, conjunctivitis, and blisters.", Severity = "mild" });
-            //mItems.Add(new Allergies() { Allergy = "turi", Reaction = "eksanthima", Severity = "mild" });
-            //mItems.Add(new Allergies() { Allergy = "psomi", Reaction = "eksanthima", Severity = "mild" });
-
-            //CustomAdapter3 adapter = new CustomAdapter3(this, mItems);
-
-            //mListView.Adapter = adapter;
+            Actions();
         }
 
-        private void actions()
+        private void Actions()
         {
             bool IsValidJson;
             ConsumeRest cRest = new ConsumeRest();
@@ -56,6 +53,8 @@ namespace EHR_Application.Activities
             try
             {
                 endpoint = address.Endpoint + "AllergiesList/" + myID;
+                if(IsDoctor == true) { endpoint = address.Endpoint + "AllergiesList/" + myID; }
+
                 strResponse = cRest.makeRequest(endpoint);
                 IsValidJson = validateJson.IsValidJson(strResponse);
                 deserializedAllergies = JsonConvert.DeserializeObject<List<Allergies>>(strResponse.ToString());

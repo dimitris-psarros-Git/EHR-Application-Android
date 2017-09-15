@@ -11,7 +11,6 @@ using Android.Widget;
 using Newtonsoft.Json;
 using Android.Content.Res;
 using System.IO;
-
 using EHR_Application.Models;
 using Newtonsoft.Json.Linq;
 using EHR_Application.Activities;
@@ -21,12 +20,11 @@ using EHR_Application.Post_Get;
 
 namespace EHR_Application
 {
-    [Activity(Label = "   Demographics  ",Theme = "@style/MyTheme1"  /*Theme="@style/Theme.AppCompat.Light.NoActionBar"*/)]
+    [Activity(Label = "    Patient Info  ",Theme = "@style/MyTheme1"  /*Theme="@style/Theme.AppCompat.Light.NoActionBar"*/)]
     public class DemographicActivity : Activity
     {
         Spinner spin;
         Spinner spin1;
-        TextView txt1;
         TextView txt13;
         TextView txt14;
         TextView txt15;
@@ -44,12 +42,11 @@ namespace EHR_Application
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.DemogrLayout);
 
-            // Data from previous activity
+            //Data from previous activity
             myID = Intent.GetIntExtra("myID", -1);
             
             spin1 = FindViewById<Spinner>(Resource.Id.spinner2);
             spin  = FindViewById<Spinner>(Resource.Id.spinner1);
-            txt1  = FindViewById<TextView>(Resource.Id.txt1);
             txt13 = FindViewById<TextView>(Resource.Id.txt13);    
             txt14 = FindViewById<TextView>(Resource.Id.txt14);
             txt15 = FindViewById<TextView>(Resource.Id.txt15);
@@ -61,18 +58,7 @@ namespace EHR_Application
             
             Actions();
 
-            bool IsDoctor = RetrieveBool();
-
-            //Button button3 = FindViewById<Button>(Resource.Id.SelectPerson);
-            //button3.Click += methodInvokeAlertDialogWithListView;
-        }
-
-        private bool RetrieveBool()
-        {
-            Context mContext = Android.App.Application.Context;
-            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(mContext);
-            bool mBool = prefs.GetBoolean("Is_Doctor", false);
-            return mBool;
+            //bool IsDoctor = RetrieveBool();
         }
         
         #region MenuInflater
@@ -104,24 +90,27 @@ namespace EHR_Application
             }
             else if (id == Resource.Id.action_settings8)
             {
-                Toast.MakeText(this, "See Tasks", ToastLength.Short).Show();
+                Toast.MakeText(this, " Notes ", ToastLength.Short).Show();
                 var intent = new Intent(this, typeof(ToDoActivity));
+                StartActivity(intent);
+                return true;
+            }
+            else if (id == Resource.Id.action_settings12)
+            {
+                Toast.MakeText(this, " New Images ", ToastLength.Short).Show();
+                var intent = new Intent(this, typeof(NewImagesActivity));
+                intent.PutExtra("myID", myID);
                 StartActivity(intent);
                 return true;
             }
             else if (id == Resource.Id.action_settings)
             {
                 Toast.MakeText(this, "Send Data", ToastLength.Short).Show();
-                //var intent = new Intent(this, typeof(SendDataActivity));
-                ////intent.PutExtra("PerID", PersonId);
-                //StartActivity(intent);
-                //return true;
                 var intent = new Intent(this, typeof(ListviewContactsActivity));
                 intent.PutExtra("myID", myID);
                 intent.PutExtra("sendData", true);
                 StartActivity(intent);
                 return true;
-
             }
             else if (id == Resource.Id.action_settings1)
             {
@@ -150,10 +139,6 @@ namespace EHR_Application
             {
                 int PersonalID = myID;
                 Toast.MakeText(this, "Photos", ToastLength.Short).Show();
-                //var intent = new Intent(this, typeof(PhotoActivity));
-                ////intent.PutExtra("PerID", PersonId);
-                //StartActivity(intent);
-                //return true;
                 var intent = new Intent(this, typeof(ListviewContactsActivity));
                 intent.PutExtra("myID", myID);
                 intent.PutExtra("photos", true);
@@ -172,15 +157,14 @@ namespace EHR_Application
         
         public void Actions()
         {
-            object strResponse;
-            bool IsValidJson;
-            string endpoint;
             List<string> Teleph = new List<string>();
             List<string> emails = new List<string>();
             ConsumeRest cRest = new ConsumeRest();
             ValidateJson validateJson = new ValidateJson();
             Address address = new Address();
-            txt1.Text = "Patient";
+            object strResponse;
+            bool IsValidJson;
+            string endpoint;
             demographics demogr;
 
             endpoint = address.Endpoint + "Demographics/" + myID;
@@ -198,18 +182,16 @@ namespace EHR_Application
                 txt24.Text = demogr.StreetName;
                 txt17.Text = demogr.StreetNumber.ToString();
                 txt18.Text = demogr.Sex;
-                txt19.Text = demogr.Birthday;
+                txt19.Text = demogr.Birthday.ToString();
 
                 if (demogr.Communications.Count !=0) {
-                    for (int j = 0; j < 200; j++)
-                    {
                         for (int i = 0; i < demogr.Communications.Count; i++)
                         {
                             Teleph.Add(demogr.Communications[i].Telephone.ToString());
                             emails.Add(demogr.Communications[i].email);
                         }
-                    }
-                    adapt = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, Teleph);
+
+                    adapt =  new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, Teleph);
                     adapt1 = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, emails);
                     spin.Adapter = adapt;
                     spin1.Adapter = adapt1;
@@ -225,12 +207,10 @@ namespace EHR_Application
         }
         
         #region ListView AlertDialog
-        //List<SelectChoice> selectChoice = new List<SelectChoice>();      
-        //List<Tuple<int, string>> mylist = new List<Tuple<int, string>>();
+      
         List<string> _lstDataItem;    
         int Number;
-        
-        void methodInvokeAlertDialogWithListView(/*object sender, EventArgs e*/)
+        void methodInvokeAlertDialogWithListView()
         {
             ConsumeRest cRest = new ConsumeRest();
             Address address = new Address();
@@ -280,8 +260,8 @@ namespace EHR_Application
             Toast.MakeText(this, "you clicked on " + btnClicked.Text, ToastLength.Long).Show();
         }
         #endregion
-
         
+
         #region ListView AlertDialog
         List<string> _lstDataItem2;
         List<NewMessages2> deserializedContacts, receivedMes;
@@ -303,7 +283,7 @@ namespace EHR_Application
             if (IsValidJson1)
             {
                 deserializedContacts = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse.ToString());
-                receivedMes = deserializedContacts.OrderBy(c => c.LastName).ToList();
+                receivedMes = deserializedContacts.OrderBy(c => c.FirstName).ToList();
                 for (int i = 0; i < receivedMes.Count; i++)
                 {
                     string NAME = "New Message from: " + receivedMes[i].FirstName + " " + receivedMes[i].LastName;
@@ -335,10 +315,12 @@ namespace EHR_Application
             alert.SetTitle(receivedMes[e.Position].FirstName + "  " + receivedMes[e.Position].LastName);
             alert.SetMessage(receivedMes[e.Position].Text);
             alert.SetCancelable(true);
-            alert.SetIcon(Resource.Drawable.message);
+            alert.SetIcon(Resource.Drawable.messageImage);
             Dialog dialog = alert.Create();
             dialog.Show();
-            DeleteFromNew(receivedMes[e.Position].DataSenderID);
+
+            RetrieveData RD = new RetrieveData();
+            RD.DeleteFromNew(receivedMes[e.Position].DataSenderID);        
         }
         void handllerNotingButton1(object sender, DialogClickEventArgs e)
         {
@@ -348,25 +330,6 @@ namespace EHR_Application
         }
         #endregion
         
-        
-        private async void DeleteFromNew(int datasendID)
-        {
-            Address address = new Address();
-            PutRest putrest = new PutRest();
-            string endpoint3;
-            
-            endpoint3 = address.Endpoint + "DataSenders/" + datasendID;
-            var uri = new Uri(endpoint3);
-
-            NewMessages newmessages = new NewMessages();
-            newmessages.DataSenderID = datasendID;
-            newmessages.Seen = true;
-            newmessages.Send = true;
-
-            string output = JsonConvert.SerializeObject(newmessages);
-            var StrRespPost = await PutRest.Put(output, uri);
-        }
-
         public void AlertBox()
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);

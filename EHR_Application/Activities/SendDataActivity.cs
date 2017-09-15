@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -47,7 +46,8 @@ namespace EHR_Application
             image1 = Intent.GetByteArrayExtra("image");
             image = Intent.GetByteArrayExtra("picture");   // allaksame to image apo var se byte[]
 
-            IsDoctor = RetrieveBool();
+            RetrieveData retrieve = new RetrieveData();  // retrieve "IsDoctor"
+            IsDoctor = retrieve.RetreiveBool();
 
             txt1 = FindViewById<TextView>(Resource.Id.txt1);
             message1 = FindViewById<EditText>(Resource.Id.editTxt1);
@@ -101,15 +101,6 @@ namespace EHR_Application
         //}
         //#endregion
 
-
-        private bool RetrieveBool()
-        {
-            Context mContext = Android.App.Application.Context;
-            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(mContext);
-            bool mBool = prefs.GetBoolean("Is_Doctor", false);
-            return mBool;
-        }
-
         private async void SendPhoto_ClickAsync(object sender, EventArgs e)
         {
             if (image1 == null)
@@ -153,10 +144,8 @@ namespace EHR_Application
                     requestContent.Add(new StringContent("false"), "Send");
 
                     //var response = 
-                    await client.PostAsync(endpoint /*"http://192.168.1.68:54240/api/Dat"*/, requestContent);//.Result;    // egine allagh tsekare to
-                    var exceptionResult = 8;
+                    await client.PostAsync(endpoint, requestContent);//.Result;   
                     //var input = await response.Content.ReadAsStringAsync();
-                    //return await client.PostAsync("http://192.168.1.68:54240/api/Dat", requestContent);
                 }
             }
         }
@@ -168,7 +157,7 @@ namespace EHR_Application
 
             SendMessages sendMessageJson = new SendMessages();
 
-            if (IsDoctor == false)        //  to ID toy asthenh prepei na stalei prwto
+            if (IsDoctor == false)        //  to ID tou asthenh prepei na stalei prwto
             {
                 sendMessageJson.PatientID = myID;
                 sendMessageJson.DoctorID = receiverID;

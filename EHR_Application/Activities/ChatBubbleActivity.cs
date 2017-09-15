@@ -36,8 +36,7 @@ namespace EHR_Application
             //Data from previous activity
             myID = Intent.GetIntExtra("myID", -1);
             receiverID = Intent.GetIntExtra("receiverID", -1);
-
-            IsDoctor = RetrieveBool();
+            
             setupMessages();
             CustomAdapter customAdapter = new CustomAdapter(lstChat, this);
             ListView lstView = FindViewById<ListView>(Resource.Id.myListView);
@@ -45,39 +44,31 @@ namespace EHR_Application
         }
 
         #region MenuInflater
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.option_menuGener, menu);
-            return true;
-        }
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            int id = item.ItemId;
-            if (id == Resource.Id.action_settings2)
-            {
-                Toast.MakeText(this, "Exit", ToastLength.Short).Show();
-                History_ListviewActivity histListView = new History_ListviewActivity();
-                histListView.AlertBox();
-                return true;
-            }
-            else if (id == Resource.Id.action_settings3)
-            {
-                Toast.MakeText(this, "Reload", ToastLength.Short).Show();
-                this.Recreate();
-                return true;
-            }
-            return base.OnOptionsItemSelected(item);
-            //return super.onCreateView(inflater, container, savedInstanceState);
-        }
+        //public override bool OnCreateOptionsMenu(IMenu menu)
+        //{
+        //    MenuInflater.Inflate(Resource.Menu.option_menuGener, menu);
+        //    return true;
+        //}
+        //public override bool OnOptionsItemSelected(IMenuItem item)
+        //{
+        //    int id = item.ItemId;
+        //    if (id == Resource.Id.action_settings2)
+        //    {
+        //        Toast.MakeText(this, "Exit", ToastLength.Short).Show();
+        //        History_ListviewActivity histListView = new History_ListviewActivity();
+        //        histListView.AlertBox();
+        //        return true;
+        //    }
+        //    else if (id == Resource.Id.action_settings3)
+        //    {
+        //        Toast.MakeText(this, "Reload", ToastLength.Short).Show();
+        //        this.Recreate();
+        //        return true;
+        //    }
+        //    return base.OnOptionsItemSelected(item);
+        //    //return super.onCreateView(inflater, container, savedInstanceState);
+        //}
         #endregion
-
-        private bool RetrieveBool()
-        {
-            Context mContext = Android.App.Application.Context;
-            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(mContext);
-            bool mBool = prefs.GetBoolean("Is_Doctor", false);
-            return mBool;
-        }
         
         private void setupMessages()
         {
@@ -87,15 +78,18 @@ namespace EHR_Application
             List<ReceivedMessages> chMessages;
             Address address = new Address();
 
+            RetrieveData retrieve = new RetrieveData();  // retrieve "IsDoctor"
+            IsDoctor = retrieve.RetreiveBool();
+
             if (IsDoctor == false) { endpoint = address.Endpoint + "MessagesCommunication/" + myID + "/" + receiverID; }
-            else { endpoint = address.Endpoint + "MessagesCommunication/" + receiverID + "/" + myID; }
+            else                   { endpoint = address.Endpoint + "MessagesCommunication/" + receiverID + "/" + myID; }
             
             ConsumeRest cRest = new ConsumeRest();
             strResponse = cRest.makeRequest(endpoint);
             
             ValidateJson validateJson = new ValidateJson();
             IsValid = validateJson.IsValidJson(strResponse);
-            
+
             if (IsValid)
             {
                 chMessages = JsonConvert.DeserializeObject<List<ReceivedMessages>>(strResponse.ToString());
@@ -103,9 +97,10 @@ namespace EHR_Application
                 bool  isSend;
                 for (int i = 0; i < chMessages.Count; i++)
                 {
-                    if ((IsDoctor == false) && (receivedMessag[i].IsMe == 0)) { isSend = true; }
-                    else if ((IsDoctor == true) && (receivedMessag[i].IsMe == 1)) { isSend = true; }
+                    if      ((IsDoctor == false) && (receivedMessag[i].IsMe == 0)) { isSend = true; }  // check if message is send or received
+                    else if ((IsDoctor == true) && (receivedMessag[i].IsMe == 1))  { isSend = true; }
                     else { isSend = false; }
+
                     lstChat.Add(new chatMessages() { ChatMessage = receivedMessag[i].Text + "\n" + receivedMessag[i].Date , IsSend = isSend });
                 }
             }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -27,7 +26,6 @@ namespace EHR_Application.Activities
             MainCode();
         }
 
-
         public void MainCode()
         {
             ConsumeRest cRest = new ConsumeRest();
@@ -35,9 +33,7 @@ namespace EHR_Application.Activities
             object strResponse;
             Address address = new Address();
             string endpoint = address.Endpoint + "DataSenders/2052";
-            //string endpoint = "http://192.168.2.6:54240/api/DataSenders/2052";
-            //string endpoint = "http://192.168.2.6:54240/api/Dat/2059";
-
+        
             strResponse = cRest.makeRequest(endpoint);
 
             /*List<RecievedImage> */

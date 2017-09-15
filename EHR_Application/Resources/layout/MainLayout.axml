@@ -77,12 +77,12 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="130px"
         android:id="@+id/linearLayout5">
         <Button
             android:text="Login"
             android:layout_width="230px"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/Login"
             android:layout_gravity="right"
             android:layout_marginRight="50px" />

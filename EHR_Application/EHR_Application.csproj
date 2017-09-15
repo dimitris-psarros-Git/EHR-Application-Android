@@ -112,17 +112,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\AllergiesActivity.cs" />
-    <Compile Include="Activities\DemographicsDataActivity.cs" />
+    <Compile Include="Models\icdChapters.cs" />
+    <Compile Include="Models\icd_codes.cs" />
+    <Compile Include="Perrita\DemographicsDataActivity.cs" />
     <Compile Include="Activities\DemographicsDoctorActivity.cs" />
     <Compile Include="Activities\DiagnosisListViewActivity.cs" />
+    <Compile Include="Activities\ImagesActivity.cs" />
     <Compile Include="Activities\ListviewContactsActivity.cs" />
     <Compile Include="Activities\MedicinesListViewActivity.cs" />
+    <Compile Include="Activities\NewImagesActivity.cs" />
     <Compile Include="Activities\NewMessagesListActivity.cs" />
     <Compile Include="Activities\NewVisitActivity.cs" />
-    <Compile Include="Activities\Photo1Activity.cs" />
+    <Compile Include="Perrita\Photo1Activity.cs" />
     <Compile Include="Activities\Photo2Activity.cs" />
     <Compile Include="Activities\RecyclerViewActivity.cs" />
-    <Compile Include="Activities\ShowImageActivity.cs" />
+    <Compile Include="Perrita\ShowImageActivity.cs" />
     <Compile Include="Activities\SplashScreenActivity.cs" />
     <Compile Include="Activities\ToDoActivity.cs" />
     <Compile Include="Adapters\BaseAdapter.cs" />
@@ -134,6 +138,7 @@
     <Compile Include="Adapters\RecyclerViewAdapter.cs" />
     <Compile Include="Adapters\ViewHolder.cs" />
     <Compile Include="Address.cs" />
+    <Compile Include="RetrieveData.cs" />
     <Compile Include="ContactsData.cs" />
     <Compile Include="DataRecyclerView.cs" />
     <Compile Include="Helper\Customadapter.cs" />
@@ -141,6 +146,7 @@
     <Compile Include="ImageManager.cs" />
     <Compile Include="Models\Allergies.cs" />
     <Compile Include="Models\ContactsPerson5.cs" />
+    <Compile Include="Models\ContactsPerson6.cs" />
     <Compile Include="Models\NewDiagnosis.cs" />
     <Compile Include="Models\NewMedicines.cs" />
     <Compile Include="Models\NewVisit.cs" />
@@ -162,7 +168,7 @@
     <Compile Include="Perrita\communicationData.cs" />
     <Compile Include="Adapters\CustomAdapter.cs" />
     <Compile Include="Activities\DemographicActivity.cs" />
-    <Compile Include="Activities\Activity4Activity.cs" />
+    <Compile Include="Perrita\Activity4Activity.cs" />
     <Compile Include="Models\RecievedImage.cs" />
     <Compile Include="Models\SendMessages.cs" />
     <Compile Include="Models\UserIdentity.cs" />
@@ -179,7 +185,7 @@
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Perrita\SelectChoice.cs" />
     <Compile Include="Perrita\Users.cs" />
-    <Compile Include="Activities\PhotoActivity.cs" />
+    <Compile Include="Perrita\PhotoActivity.cs" />
     <Compile Include="Post-Get\PostMultipart.cs" />
     <Compile Include="Post-Get\PostRest.cs" />
     <Compile Include="Post-Get\PutRest.cs" />
@@ -279,6 +285,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ListNewMessages.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ImagesList.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -383,6 +392,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\messageImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

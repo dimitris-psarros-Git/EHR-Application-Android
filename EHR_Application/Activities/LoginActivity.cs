@@ -18,41 +18,42 @@ using EHR_Application.Post_Get;
 
 namespace EHR_Application
 {
-    [Activity(Label = "   EHR_Application   "/*, MainLauncher = true*/, Icon = "@drawable/icon" ,Theme = "@style/MyTheme" /*Theme = "@style/MyTheme1"*/ /*"@style/Theme.AppCompat.Light"*/ )]
+    [Activity(Label = "    Login   ", Icon = "@drawable/icon" ,Theme = "@style/MyTheme" /*Theme = "@style/MyTheme1"*/ /*"@style/Theme.AppCompat.Light"*/ )]
     public class LoginActivity : AppCompatActivity
     {
-        int myId = 0;
-        bool IsDoctor;
+        List<NewMessages2> newMessages;
         TextView txt1;
         TextView txt2;
         EditText Username;
         EditText Password;
-        List<NewMessages2> newMessages;
+        int myId = 0;
+        bool IsDoctor;
+
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.MainLayout);
             
-            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-
-            Button button1 = FindViewById<Button>(Resource.Id.Login);
-            button1.Click += Button1_ClickAsync;    
-
+            //var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            //SetSupportActionBar(toolbar);
+            
             txt1 = FindViewById<TextView>(Resource.Id.txt1);    
             txt2 = FindViewById<TextView>(Resource.Id.txt2);
 
             Username = FindViewById<EditText>(Resource.Id.Username);
             Password = FindViewById<EditText>(Resource.Id.Password);
-            
+
+            Button button1 = FindViewById<Button>(Resource.Id.Login);
+            button1.Click += Button1_ClickAsync;
+
             PeriodicCheckNewMessages();
         }
 
-        public void PeriodicCheckNewMessages()
+        private void PeriodicCheckNewMessages()
         {
             var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromMinutes(1);
+            var periodTimeSpan = TimeSpan.FromMinutes(2);
             var timer = new System.Threading.Timer((e) =>
             {
                 if (myId != 0)
@@ -62,32 +63,41 @@ namespace EHR_Application
             }, null, startTimeSpan, periodTimeSpan);
         }
         
-        public void MessagesPopUp() 
+        private void MessagesPopUp() 
         {
-            object strResponse;
-            bool IsValidJson;
-            string endpoint;
+            object strResponse,strResponse2;
+            bool IsValidJson,IsValidJson2,newImages;
+            string endpoint,endpoint2;
             ConsumeRest cRest = new ConsumeRest();
             Address address = new Address();
 
-            if (IsDoctor == false) { endpoint = address.Endpoint + "PatientNewMessages1/" + myId; }
-            else { endpoint = address.Endpoint + "DoctorNewMessages1/" + myId; }
+            if (IsDoctor == false) { endpoint  = address.Endpoint + "PatientNewMessages1/" + myId;
+                                     endpoint2 = address.Endpoint + "PatientNewImages1/"   + myId; }
+            else                   { endpoint  = address.Endpoint + "DoctorNewMessages1/"  + myId;
+                                     endpoint2 = address.Endpoint + "DoctorNewImages1/"    + myId; }
 
-            strResponse = cRest.makeRequest(endpoint);
+            strResponse = cRest.makeRequest(endpoint);   // elegxos gia nea mhnumata keimenou
+            strResponse2 = cRest.makeRequest(endpoint2); // elegxos gia nea mhnumata eikonas
             ValidateJson validateJson = new ValidateJson();
-            IsValidJson = validateJson.IsValidJson(strResponse);
+            IsValidJson  = validateJson.IsValidJson(strResponse);
+            IsValidJson2 = validateJson.IsValidJson(strResponse2);
 
-            if (IsValidJson)
+            if (IsValidJson && IsValidJson2)
             {
+                // check for new images
+                newMessages = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse.ToString());
+                if (newMessages.Count != 0) { newImages = true;  }
+                else                        { newImages = false; }
+
+
                 newMessages = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse.ToString());
                 
                 if (newMessages.Count != 0)
                 {
                     for(int i=0; i < newMessages.Count; i++)
                     {
-                        MessageDelivered(i);                    // ksanavalto sto paixnidi
+                        MessageDelivered(i);                    
                     }
-                    
                     
                     RunOnUiThread(() =>
                     {
@@ -100,7 +110,7 @@ namespace EHR_Application
 
                     // Pass some information to SecondActivity:
                     Intent.PutExtra("myID", myId);
-                    Intent.PutExtra("IsDoctor", IsDoctor);
+                    Intent.PutExtra("newImage", newImages);
 
                     // Create a task stack builder to manage the back stack:
                     TaskStackBuilder stackBuilder = TaskStackBuilder.Create(this);
@@ -147,7 +157,6 @@ namespace EHR_Application
                         const int notificationId = 0;
                         notificationManager.Notify(notificationId, notification);
                     //}
-                    
                 }
             }
         }
@@ -186,43 +195,49 @@ namespace EHR_Application
             usercheck.Password = InsertPasw;
             
             string output = JsonConvert.SerializeObject(usercheck);
-            var StrRespPost = await PostRest.Post(output, uri,false);
+            var StrRespPost = await PostRest.Post(output, uri, false);
             ValidateJson validatejson = new ValidateJson();
             bool valid = validatejson.IsValidJson(StrRespPost);
 
             if (valid)   
             {
-                UserIdentity userident = JsonConvert.DeserializeObject<UserIdentity>(StrRespPost.ToString());
-
-                if (userident != null)
+                try
                 {
-                    IsDoctor = userident.IsDoctor;
-                    myId = userident.PersonID;
-                    //PerId1 = userident.PersonID;
+                    UserIdentity userident = JsonConvert.DeserializeObject<UserIdentity>(StrRespPost.ToString());
 
-                    SaveBool(IsDoctor);
-
-                    if (IsDoctor)
+                    if (userident != null)
                     {
-                        var intent = new Intent(this, typeof(DemographicsDoctorActivity));
-                        intent.PutExtra("myID", myId);
-                        StartActivity(intent);
+                        IsDoctor = userident.IsDoctor;
+                        myId = userident.PersonID;
+
+                        SaveBool(IsDoctor);  //save in Shared Preferences if it is Doctor
+
+                        if (IsDoctor)
+                        {
+                            var intent = new Intent(this, typeof(DemographicsDoctorActivity));
+                            intent.PutExtra("myID", myId);
+                            StartActivity(intent);
+                        }
+                        else
+                        {
+                            var intent = new Intent(this, typeof(DemographicActivity));
+                            intent.PutExtra("myID", myId);
+                            StartActivity(intent);
+                        }
                     }
                     else
                     {
-                        var intent = new Intent(this, typeof(DemographicActivity));
-                        intent.PutExtra("myID", myId);
-                        StartActivity(intent);
+                        txt2.Text = "Unsuccessfull Login due to an error";
                     }
                 }
-                else
+                catch
                 {
-                    txt2.Text = "Unsuccessfull Login UserName or Password isn't valid" ;
+                    txt2.Text = "Unsuccessfull Login due to an error";
                 }
             }
             else
             {
-                txt2.Text = "Unsuccessfull Login due to an error " + StrRespPost;
+                txt2.Text = "Unsuccessfull Login UserName or Password isn't valid" + "\n" + "Or check internet connection" +"\n" + StrRespPost;
             }
 
         }
@@ -243,7 +258,7 @@ namespace EHR_Application
                 dialog.Show();
         }
 
-        public void SaveBool(bool IsDoctor)         // save if it is Doctor or Patient
+        private void SaveBool(bool IsDoctor)    //save if it is Doctor or Patient
         {
             Context mContext = Android.App.Application.Context;
             ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(mContext);

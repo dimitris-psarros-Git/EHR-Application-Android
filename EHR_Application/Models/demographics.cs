@@ -24,6 +24,6 @@ namespace EHR_Application
         public string City { get; set; }
         public string StreetName { get; set; }
         public int StreetNumber { get; set; }
-        public string Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
     }
 }

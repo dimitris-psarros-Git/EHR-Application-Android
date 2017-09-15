@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
   <!--///showAsAction="always" ///-->
   <item android:id="@+id/action_settings12" android:clickable="false" android:title="See Demographics of Patient" showAsAction="always" />
-  <item android:id="@+id/action_settings5" android:clickable="false" android:title="See Health History of Patient" showAsAction="always" />
-  <item android:id="@+id/action_settings9" android:clickable="false" android:title="Add Health History of Patient" showAsAction="always" />
+  <item android:id="@+id/action_settings5"  android:clickable="false" android:title="See Health History of Patient" showAsAction="always" />
+  <item android:id="@+id/action_settings9"  android:clickable="false" android:title="Add Health History of Patient" showAsAction="always" />
   <item android:id="@+id/action_settings10" android:clickable="false" android:title="See Allergies/Reactions of Patient" showAsAction="always" />
-  <item android:id="@+id/action_settings"  android:clickable="false" android:title="Send Data" showAsAction="always" />
-  <item android:id="@+id/action_settings1" android:clickable="false" android:title="Messages" showAsAction="always" />
-  <item android:id="@+id/action_settings6" android:clickable="false" android:title="Photos" showAsAction="always" />
-  <item android:id="@+id/action_settings7" android:clickable="false" android:title="See Contacts" showAsAction="always" />
+  <item android:id="@+id/action_settings"   android:clickable="false" android:title="Send Data" showAsAction="always" />
+  <item android:id="@+id/action_settings1"  android:clickable="false" android:title="Messages" showAsAction="always" />
+  <item android:id="@+id/action_settings6"  android:clickable="false" android:title="Photos" showAsAction="always" />
+  <item android:id="@+id/action_settings7"  android:clickable="false" android:title="See Contacts" showAsAction="always" />
   <item android:id="@+id/action_settings11" android:clickable="false" android:title="New Messages" showAsAction="always" />
-  <item android:id="@+id/action_settings2" android:clickable="false" android:title="Exit" showAsAction="always" />
+  <item android:id="@+id/action_settings13" android:clickable="false" android:title="New Images" showAsAction="always" />
+  <item android:id="@+id/action_settings2"  android:clickable="false" android:title="Exit" showAsAction="always" />
   <!--/android:showAsAction="ifRoom"/-->
-  <item android:id="@+id/action_settings3" android:clickable="false" android:title="Reload" android:showAsAction="ifRoom" />
-  <item android:id="@+id/action_settings4" android:clickable="false" android:title="PerData" android:showAsAction="ifRoom" />
+  <item android:id="@+id/action_settings3"  android:clickable="false" android:title="Reload" android:showAsAction="ifRoom" />
 </menu>

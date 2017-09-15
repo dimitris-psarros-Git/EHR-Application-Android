@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <ListView
+        android:id="@+id/listViewImages"
+        android:layout_width="match_parent"
+        android:layout_height="600px"
+        android:fastScrollEnabled="true" />
+    <ImageView
+        android:id="@+id/imageViewV"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="70px"
+        android:layout_marginRight="70px"
+        android:layout_height="300px" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70px"
+        android:id="@+id/textImage" />
+</LinearLayout>

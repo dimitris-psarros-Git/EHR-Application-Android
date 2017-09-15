@@ -22,7 +22,6 @@ namespace EHR_Application.Post_Get
         {
             using (var client = new HttpClient())
             {
-
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 try
@@ -38,19 +37,13 @@ namespace EHR_Application.Post_Get
                 }
                 catch (WebException e)
                 {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
-                    {
-
-                    }
                     return e.Status.ToString();
                 }
                 catch (Exception e)
                 {
                     return e.Message.ToString();
                 }
-
             }
-            return null;
         }
     }
 }

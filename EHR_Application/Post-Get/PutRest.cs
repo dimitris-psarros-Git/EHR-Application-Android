@@ -37,20 +37,12 @@ namespace EHR_Application.Post_Get
                 }
                 catch (WebException e)
                 {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
-                    {
-                        //Toast.Show("Status Code : ", ((HttpWebResponse)e.Response).StatusCode);
-                        //main.Print(/*"Status Description : ",*/ ((HttpWebResponse)e.Response).StatusDescription);
-                    }
-                    //main.Print(/*"\r\nWebException Raised. The following error occured :",*/ e.Message);
                     return e.Status.ToString();
                 }
                 catch (Exception e)
                 {
-                    //main.Print(/*"\nThe following Exception was raised : "+ */ e.Message);
                     return e.Message.ToString();
                 }
-
             }
         }
     }

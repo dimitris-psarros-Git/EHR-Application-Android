@@ -16,27 +16,34 @@ using Android.Support.V7.App;
 
 namespace EHR_Application.Activities
 {
-    [Activity(Label = "    NewMessages  ", Theme = "@style/MyTheme")]
+    [Activity(Label = "    New Messages  ", Theme = "@style/MyTheme")]
     public class NewMessagesListActivity : AppCompatActivity
     {
         List<ContactsPerson5> contactsPerson5;
         List<NewMessages2> newMessages;
         ListView lstNames;
+        TextView txtImage;
         //Object messages;
         CustomAdapter4 adapter;
-        int myID=1000;                       /////////////////////////////////    authereto diorthwse to !!!!
-        bool IsDoctor;
+        int myID;                      
+        bool IsDoctor,newImages;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ListNewMessages);
 
+            myID = Intent.GetIntExtra("myID", -1);
+            newImages = Intent.GetBooleanExtra("newImage",false);
+
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
             lstNames = FindViewById<ListView>(Resource.Id.listViewMessages);
-            IsDoctor = Intent.GetBooleanExtra("IsDoctor", false);
+            txtImage = FindViewById<TextView>(Resource.Id.textView3);
+
+            RetrieveData retrieve = new RetrieveData();  // retrieve "IsDoctor"
+            IsDoctor = retrieve.RetreiveBool();
 
             adapter = new CustomAdapter4(contactsPerson5);
             Actions();
@@ -86,6 +93,7 @@ namespace EHR_Application.Activities
             alert.SetIcon(Resource.Drawable.message);
             Dialog dialog = alert.Create();
             dialog.Show();
+            
             DeleteFromNew(newMessages[e.Position].DataSenderID);
         }
 
@@ -101,8 +109,6 @@ namespace EHR_Application.Activities
             NewMessages newmessages = new NewMessages();
             newmessages.DataSenderID = datasendID;
             newmessages.Send = true;
-            newmessages.Seen = true;
-
 
             string output = JsonConvert.SerializeObject(newmessages);
             var StrRespPost = await PutRest.Put(output, uri);
@@ -116,8 +122,11 @@ namespace EHR_Application.Activities
             ConsumeRest cRest = new ConsumeRest();
             Address address = new Address();
 
+            if (newImages == false) { txtImage.Text = "No new images"; }
+            else                    { txtImage.Text = "New images found. Check for them at New Images file"; }
+
             if (IsDoctor == false) { endpoint = address.Endpoint + "PatientNewMessages/" + myID; }
-            else { endpoint = address.Endpoint + "DoctorNewMessages/" + myID; }
+            else                   { endpoint = address.Endpoint + "DoctorNewMessages/" + myID;  }
 
             strResponse = cRest.makeRequest(endpoint);
             ValidateJson validateJson = new ValidateJson();
@@ -126,6 +135,7 @@ namespace EHR_Application.Activities
             if (IsValidJson)
             {
                 newMessages = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse.ToString());
+                newMessages = newMessages.OrderBy(i => i.FirstName).ToList();
             }
             
             SetData();
