@@ -33,6 +33,7 @@ namespace EHR_Application.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ListNewMessages);
 
+            string message = Intent.Extras.GetString("message", "");
             myID = Intent.GetIntExtra("myID", -1);
             newImages = Intent.GetBooleanExtra("newImage",false);
 
@@ -114,7 +115,7 @@ namespace EHR_Application.Activities
             var StrRespPost = await PutRest.Put(output, uri);
         }
 
-        protected void  Actions()
+        protected void Actions()
         {
             object strResponse;
             bool IsValidJson;
@@ -123,12 +124,13 @@ namespace EHR_Application.Activities
             Address address = new Address();
 
             if (newImages == false) { txtImage.Text = "No new images"; }
-            else                    { txtImage.Text = "New images found. Check for them at New Images file"; }
+            else { txtImage.Text = " New images found!! " + "\n" + " Check for them at <New Images>"; }
 
             if (IsDoctor == false) { endpoint = address.Endpoint + "PatientNewMessages/" + myID; }
-            else                   { endpoint = address.Endpoint + "DoctorNewMessages/" + myID;  }
+            else { endpoint = address.Endpoint + "DoctorNewMessages/" + myID; }
 
             strResponse = cRest.makeRequest(endpoint);
+
             ValidateJson validateJson = new ValidateJson();
             IsValidJson = validateJson.IsValidJson(strResponse);
 
@@ -136,9 +138,19 @@ namespace EHR_Application.Activities
             {
                 newMessages = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse.ToString());
                 newMessages = newMessages.OrderBy(i => i.FirstName).ToList();
-            }
             
             SetData();
+            }
+            else
+            {
+                newMessages = JsonConvert.DeserializeObject<List<NewMessages2>>("[]".ToString());
+
+               new Android.App.AlertDialog.Builder(this)
+              .SetTitle("An error has occured")
+              .SetMessage("No data found due to unexpected problem "+ "\n" + strResponse)
+              .SetIcon(Resource.Drawable.error)
+              .Show();
+            }
         }
 
         public void SetData()

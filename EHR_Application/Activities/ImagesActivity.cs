@@ -16,7 +16,7 @@ using EHR_Application.Adapters;
 
 namespace EHR_Application.Activities
 {
-    [Activity(Label = "    Images   "/*, Theme = "@style/MyTheme", MainLauncher = true*/)]
+    [Activity(Label = "    Images   " , Theme = "@style/MyTheme1" )]
     public class ImagesActivity : Activity
     {
         ImageView imageView;
@@ -77,9 +77,12 @@ namespace EHR_Application.Activities
             }
             else
             {
+                imageIds = JsonConvert.DeserializeObject<List<imageIDs>>("[]".ToString());
+
                 new AlertDialog.Builder(this)
               .SetTitle("An error has occured")
-              .SetMessage("No data found due to unexpected problem" + "n/" + strResponse)
+              .SetIcon(Resource.Drawable.error)
+              .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
               .Show();
             }
             SetData();
@@ -142,12 +145,20 @@ namespace EHR_Application.Activities
                 Image.Length);
                 imageView.SetImageBitmap(bitmap);
 
-                txtImage.Text = imageChats[0].Text;
+                if (imageChats[0].Text!=null) {
+                    txtImage.Text = "Image details " + "\n" + imageChats[0].Text;
+                    txtImage.SetTextColor(Color.Red);
+                }
+                else
+                {
+                    txtImage.Text = " There are no details ";
+                }
             }
             else
             {
                 new AlertDialog.Builder(this)
               .SetTitle("An error has occured")
+              .SetIcon(Resource.Drawable.error)
               .SetMessage("No data found due to unexpected problem")
               .Show();
             }

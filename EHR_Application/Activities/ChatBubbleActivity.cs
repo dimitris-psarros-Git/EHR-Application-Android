@@ -106,6 +106,8 @@ namespace EHR_Application
             }
             else
             {
+                chMessages = JsonConvert.DeserializeObject<List<ReceivedMessages>>("[]".ToString());
+
                 new Android.App.AlertDialog.Builder(this)
                 .SetTitle("An error has occured")
                 .SetMessage("No data found do to unexpected problem" + "\n" + strResponse)

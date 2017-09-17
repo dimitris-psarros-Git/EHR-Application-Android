@@ -16,7 +16,7 @@ using System.Timers;
 
 namespace EHR_Application.Activities
 {
-    [Activity(Label = "  Wellcome " /*, MainLauncher=true*/ , Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar" )]
+    [Activity(Label = "  Wellcome " , MainLauncher=true , Icon = "@drawable/icon", Theme = "@style/Theme.AppCompat.Light.NoActionBar" )]
     public class SplashScreenActivity : AppCompatActivity
     {
         private ProgressBar progressBar;

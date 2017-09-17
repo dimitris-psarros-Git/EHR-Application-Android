@@ -1792,11 +1792,11 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060083
 			public const int AllergiesListView = 2131099779;
 			
-			// aapt resource value: 0x7f0600b5
-			public const int Cancel = 2131099829;
+			// aapt resource value: 0x7f0600b7
+			public const int Cancel = 2131099831;
 			
-			// aapt resource value: 0x7f0600c1
-			public const int Gallery = 2131099841;
+			// aapt resource value: 0x7f0600c3
+			public const int Gallery = 2131099843;
 			
 			// aapt resource value: 0x7f06008e
 			public const int Login = 2131099790;
@@ -1804,29 +1804,29 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06008d
 			public const int Password = 2131099789;
 			
+			// aapt resource value: 0x7f0600c7
+			public const int Reselect = 2131099847;
+			
+			// aapt resource value: 0x7f0600b6
+			public const int Return = 2131099830;
+			
+			// aapt resource value: 0x7f0600c1
+			public const int SendPhoto = 2131099841;
+			
 			// aapt resource value: 0x7f0600c5
-			public const int Reselect = 2131099845;
+			public const int SendText = 2131099845;
 			
-			// aapt resource value: 0x7f0600b4
-			public const int Return = 2131099828;
-			
-			// aapt resource value: 0x7f0600bf
-			public const int SendPhoto = 2131099839;
-			
-			// aapt resource value: 0x7f0600c3
-			public const int SendText = 2131099843;
-			
-			// aapt resource value: 0x7f0600c0
-			public const int TakePhoto = 2131099840;
+			// aapt resource value: 0x7f0600c2
+			public const int TakePhoto = 2131099842;
 			
 			// aapt resource value: 0x7f06008c
 			public const int Username = 2131099788;
 			
-			// aapt resource value: 0x7f06009c
-			public const int action0 = 2131099804;
+			// aapt resource value: 0x7f06009e
+			public const int action0 = 2131099806;
 			
-			// aapt resource value: 0x7f0600c7
-			public const int action_add = 2131099847;
+			// aapt resource value: 0x7f0600c9
+			public const int action_add = 2131099849;
 			
 			// aapt resource value: 0x7f06004a
 			public const int action_bar = 2131099722;
@@ -1849,17 +1849,17 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060027
 			public const int action_bar_title = 2131099687;
 			
-			// aapt resource value: 0x7f060099
-			public const int action_container = 2131099801;
+			// aapt resource value: 0x7f06009b
+			public const int action_container = 2131099803;
 			
 			// aapt resource value: 0x7f06004b
 			public const int action_context_bar = 2131099723;
 			
-			// aapt resource value: 0x7f0600a0
-			public const int action_divider = 2131099808;
+			// aapt resource value: 0x7f0600a2
+			public const int action_divider = 2131099810;
 			
-			// aapt resource value: 0x7f06009a
-			public const int action_image = 2131099802;
+			// aapt resource value: 0x7f06009c
+			public const int action_image = 2131099804;
 			
 			// aapt resource value: 0x7f060003
 			public const int action_menu_divider = 2131099651;
@@ -1876,56 +1876,56 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060029
 			public const int action_mode_close_button = 2131099689;
 			
-			// aapt resource value: 0x7f0600d6
-			public const int action_setting1 = 2131099862;
-			
-			// aapt resource value: 0x7f0600ca
-			public const int action_settings = 2131099850;
-			
-			// aapt resource value: 0x7f0600cb
-			public const int action_settings1 = 2131099851;
-			
-			// aapt resource value: 0x7f0600d3
-			public const int action_settings10 = 2131099859;
-			
-			// aapt resource value: 0x7f0600d4
-			public const int action_settings11 = 2131099860;
-			
-			// aapt resource value: 0x7f0600cf
-			public const int action_settings12 = 2131099855;
-			
-			// aapt resource value: 0x7f0600d5
-			public const int action_settings13 = 2131099861;
-			
-			// aapt resource value: 0x7f0600d1
-			public const int action_settings2 = 2131099857;
-			
-			// aapt resource value: 0x7f0600d2
-			public const int action_settings3 = 2131099858;
-			
-			// aapt resource value: 0x7f0600c9
-			public const int action_settings4 = 2131099849;
-			
-			// aapt resource value: 0x7f0600c8
-			public const int action_settings5 = 2131099848;
+			// aapt resource value: 0x7f0600d8
+			public const int action_setting1 = 2131099864;
 			
 			// aapt resource value: 0x7f0600cc
-			public const int action_settings6 = 2131099852;
+			public const int action_settings = 2131099852;
 			
 			// aapt resource value: 0x7f0600cd
-			public const int action_settings7 = 2131099853;
+			public const int action_settings1 = 2131099853;
 			
-			// aapt resource value: 0x7f0600d0
-			public const int action_settings8 = 2131099856;
+			// aapt resource value: 0x7f0600d5
+			public const int action_settings10 = 2131099861;
+			
+			// aapt resource value: 0x7f0600d6
+			public const int action_settings11 = 2131099862;
+			
+			// aapt resource value: 0x7f0600d1
+			public const int action_settings12 = 2131099857;
+			
+			// aapt resource value: 0x7f0600d7
+			public const int action_settings13 = 2131099863;
+			
+			// aapt resource value: 0x7f0600d3
+			public const int action_settings2 = 2131099859;
+			
+			// aapt resource value: 0x7f0600d4
+			public const int action_settings3 = 2131099860;
+			
+			// aapt resource value: 0x7f0600cb
+			public const int action_settings4 = 2131099851;
+			
+			// aapt resource value: 0x7f0600ca
+			public const int action_settings5 = 2131099850;
 			
 			// aapt resource value: 0x7f0600ce
-			public const int action_settings9 = 2131099854;
+			public const int action_settings6 = 2131099854;
 			
-			// aapt resource value: 0x7f06009b
-			public const int action_text = 2131099803;
+			// aapt resource value: 0x7f0600cf
+			public const int action_settings7 = 2131099855;
 			
-			// aapt resource value: 0x7f0600a9
-			public const int actions = 2131099817;
+			// aapt resource value: 0x7f0600d2
+			public const int action_settings8 = 2131099858;
+			
+			// aapt resource value: 0x7f0600d0
+			public const int action_settings9 = 2131099856;
+			
+			// aapt resource value: 0x7f06009d
+			public const int action_text = 2131099805;
+			
+			// aapt resource value: 0x7f0600ab
+			public const int actions = 2131099819;
 			
 			// aapt resource value: 0x7f06002a
 			public const int activity_chooser_view_content = 2131099690;
@@ -1945,38 +1945,38 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060023
 			public const int bottom = 2131099683;
 			
-			// aapt resource value: 0x7f0600b2
-			public const int btnCamera = 2131099826;
+			// aapt resource value: 0x7f0600b4
+			public const int btnCamera = 2131099828;
 			
-			// aapt resource value: 0x7f0600bc
-			public const int btnDelete = 2131099836;
+			// aapt resource value: 0x7f0600be
+			public const int btnDelete = 2131099838;
 			
 			// aapt resource value: 0x7f060082
 			public const int bubbleChat = 2131099778;
 			
-			// aapt resource value: 0x7f060092
-			public const int button1 = 2131099794;
+			// aapt resource value: 0x7f060093
+			public const int button1 = 2131099795;
 			
 			// aapt resource value: 0x7f060091
 			public const int button3 = 2131099793;
 			
-			// aapt resource value: 0x7f060098
-			public const int button4 = 2131099800;
+			// aapt resource value: 0x7f06009a
+			public const int button4 = 2131099802;
 			
-			// aapt resource value: 0x7f0600c6
-			public const int button6 = 2131099846;
+			// aapt resource value: 0x7f0600c8
+			public const int button6 = 2131099848;
 			
 			// aapt resource value: 0x7f060031
 			public const int buttonPanel = 2131099697;
 			
-			// aapt resource value: 0x7f06009d
-			public const int cancel_action = 2131099805;
+			// aapt resource value: 0x7f06009f
+			public const int cancel_action = 2131099807;
 			
 			// aapt resource value: 0x7f060041
 			public const int checkbox = 2131099713;
 			
-			// aapt resource value: 0x7f0600a5
-			public const int chronometer = 2131099813;
+			// aapt resource value: 0x7f0600a7
+			public const int chronometer = 2131099815;
 			
 			// aapt resource value: 0x7f06001f
 			public const int collapseActionView = 2131099679;
@@ -2002,26 +2002,29 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06000d
 			public const int disableHome = 2131099661;
 			
-			// aapt resource value: 0x7f060095
-			public const int editText3 = 2131099797;
-			
 			// aapt resource value: 0x7f060097
-			public const int editText4 = 2131099799;
+			public const int editText3 = 2131099799;
 			
-			// aapt resource value: 0x7f0600be
-			public const int editTxt1 = 2131099838;
+			// aapt resource value: 0x7f060099
+			public const int editText4 = 2131099801;
+			
+			// aapt resource value: 0x7f060092
+			public const int editText5 = 2131099794;
+			
+			// aapt resource value: 0x7f0600c0
+			public const int editTxt1 = 2131099840;
 			
 			// aapt resource value: 0x7f06004c
 			public const int edit_query = 2131099724;
 			
-			// aapt resource value: 0x7f0600c2
-			public const int editxt = 2131099842;
+			// aapt resource value: 0x7f0600c4
+			public const int editxt = 2131099844;
 			
 			// aapt resource value: 0x7f06001c
 			public const int end = 2131099676;
 			
-			// aapt resource value: 0x7f0600af
-			public const int end_padder = 2131099823;
+			// aapt resource value: 0x7f0600b1
+			public const int end_padder = 2131099825;
 			
 			// aapt resource value: 0x7f06002b
 			public const int expand_activities_button = 2131099691;
@@ -2044,8 +2047,8 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06002f
 			public const int icon = 2131099695;
 			
-			// aapt resource value: 0x7f0600aa
-			public const int icon_group = 2131099818;
+			// aapt resource value: 0x7f0600ac
+			public const int icon_group = 2131099820;
 			
 			// aapt resource value: 0x7f060020
 			public const int ifRoom = 2131099680;
@@ -2053,8 +2056,8 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06002c
 			public const int image = 2131099692;
 			
-			// aapt resource value: 0x7f0600b3
-			public const int imageView = 2131099827;
+			// aapt resource value: 0x7f0600b5
+			public const int imageView = 2131099829;
 			
 			// aapt resource value: 0x7f060066
 			public const int imageView1 = 2131099750;
@@ -2062,8 +2065,8 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06007f
 			public const int imageViewV = 2131099775;
 			
-			// aapt resource value: 0x7f0600a6
-			public const int info = 2131099814;
+			// aapt resource value: 0x7f0600a8
+			public const int info = 2131099816;
 			
 			// aapt resource value: 0x7f060081
 			public const int item = 2131099777;
@@ -2074,26 +2077,26 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060025
 			public const int left = 2131099685;
 			
-			// aapt resource value: 0x7f0600ab
-			public const int line1 = 2131099819;
-			
 			// aapt resource value: 0x7f0600ad
-			public const int line3 = 2131099821;
+			public const int line1 = 2131099821;
+			
+			// aapt resource value: 0x7f0600af
+			public const int line3 = 2131099823;
 			
 			// aapt resource value: 0x7f06005a
 			public const int linearLayout1 = 2131099738;
 			
-			// aapt resource value: 0x7f0600c4
-			public const int linearLayout10 = 2131099844;
+			// aapt resource value: 0x7f0600c6
+			public const int linearLayout10 = 2131099846;
 			
 			// aapt resource value: 0x7f060067
 			public const int linearLayout100 = 2131099751;
 			
-			// aapt resource value: 0x7f060094
-			public const int linearLayout11 = 2131099796;
-			
 			// aapt resource value: 0x7f060096
-			public const int linearLayout12 = 2131099798;
+			public const int linearLayout11 = 2131099798;
+			
+			// aapt resource value: 0x7f060098
+			public const int linearLayout12 = 2131099800;
 			
 			// aapt resource value: 0x7f06005c
 			public const int linearLayout2 = 2131099740;
@@ -2119,8 +2122,8 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06007a
 			public const int linearLayout8 = 2131099770;
 			
-			// aapt resource value: 0x7f060093
-			public const int linearLayout9 = 2131099795;
+			// aapt resource value: 0x7f060095
+			public const int linearLayout9 = 2131099797;
 			
 			// aapt resource value: 0x7f06000a
 			public const int listMode = 2131099658;
@@ -2140,17 +2143,17 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060090
 			public const int lstTask = 2131099792;
 			
-			// aapt resource value: 0x7f06009f
-			public const int media_actions = 2131099807;
-			
-			// aapt resource value: 0x7f0600d7
-			public const int menu_edit = 2131099863;
+			// aapt resource value: 0x7f0600a1
+			public const int media_actions = 2131099809;
 			
 			// aapt resource value: 0x7f0600d9
-			public const int menu_preferences = 2131099865;
+			public const int menu_edit = 2131099865;
 			
-			// aapt resource value: 0x7f0600d8
-			public const int menu_save = 2131099864;
+			// aapt resource value: 0x7f0600db
+			public const int menu_preferences = 2131099867;
+			
+			// aapt resource value: 0x7f0600da
+			public const int menu_save = 2131099866;
 			
 			// aapt resource value: 0x7f06001d
 			public const int middle = 2131099677;
@@ -2158,11 +2161,11 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060015
 			public const int multiply = 2131099669;
 			
-			// aapt resource value: 0x7f0600b0
-			public const int myButton = 2131099824;
+			// aapt resource value: 0x7f0600b2
+			public const int myButton = 2131099826;
 			
-			// aapt resource value: 0x7f0600b1
-			public const int myImageView = 2131099825;
+			// aapt resource value: 0x7f0600b3
+			public const int myImageView = 2131099827;
 			
 			// aapt resource value: 0x7f060059
 			public const int myListView = 2131099737;
@@ -2179,14 +2182,14 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06000b
 			public const int normal = 2131099659;
 			
-			// aapt resource value: 0x7f0600a8
-			public const int notification_background = 2131099816;
+			// aapt resource value: 0x7f0600aa
+			public const int notification_background = 2131099818;
 			
-			// aapt resource value: 0x7f0600a2
-			public const int notification_main_column = 2131099810;
+			// aapt resource value: 0x7f0600a4
+			public const int notification_main_column = 2131099812;
 			
-			// aapt resource value: 0x7f0600a1
-			public const int notification_main_column_container = 2131099809;
+			// aapt resource value: 0x7f0600a3
+			public const int notification_main_column_container = 2131099811;
 			
 			// aapt resource value: 0x7f060033
 			public const int parentPanel = 2131099699;
@@ -2203,17 +2206,17 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060043
 			public const int radio = 2131099715;
 			
-			// aapt resource value: 0x7f0600b7
-			public const int recycler = 2131099831;
+			// aapt resource value: 0x7f0600b9
+			public const int recycler = 2131099833;
 			
 			// aapt resource value: 0x7f060026
 			public const int right = 2131099686;
 			
-			// aapt resource value: 0x7f0600a7
-			public const int right_icon = 2131099815;
+			// aapt resource value: 0x7f0600a9
+			public const int right_icon = 2131099817;
 			
-			// aapt resource value: 0x7f0600a3
-			public const int right_side = 2131099811;
+			// aapt resource value: 0x7f0600a5
+			public const int right_side = 2131099813;
 			
 			// aapt resource value: 0x7f060016
 			public const int screen = 2131099670;
@@ -2296,8 +2299,8 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060019
 			public const int src_over = 2131099673;
 			
-			// aapt resource value: 0x7f06009e
-			public const int status_bar_latest_event_content = 2131099806;
+			// aapt resource value: 0x7f0600a0
+			public const int status_bar_latest_event_content = 2131099808;
 			
 			// aapt resource value: 0x7f060044
 			public const int submenuarrow = 2131099716;
@@ -2308,14 +2311,14 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06000c
 			public const int tabMode = 2131099660;
 			
-			// aapt resource value: 0x7f0600bb
-			public const int task_title = 2131099835;
+			// aapt resource value: 0x7f0600bd
+			public const int task_title = 2131099837;
+			
+			// aapt resource value: 0x7f0600b0
+			public const int text = 2131099824;
 			
 			// aapt resource value: 0x7f0600ae
-			public const int text = 2131099822;
-			
-			// aapt resource value: 0x7f0600ac
-			public const int text2 = 2131099820;
+			public const int text2 = 2131099822;
 			
 			// aapt resource value: 0x7f060080
 			public const int textImage = 2131099776;
@@ -2334,6 +2337,9 @@ namespace EHR_Application
 			
 			// aapt resource value: 0x7f060070
 			public const int textView17 = 2131099760;
+			
+			// aapt resource value: 0x7f060094
+			public const int textView18 = 2131099796;
 			
 			// aapt resource value: 0x7f06005d
 			public const int textView2 = 2131099741;
@@ -2359,8 +2365,8 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06007b
 			public const int textView9 = 2131099771;
 			
-			// aapt resource value: 0x7f0600a4
-			public const int time = 2131099812;
+			// aapt resource value: 0x7f0600a6
+			public const int time = 2131099814;
 			
 			// aapt resource value: 0x7f060030
 			public const int title = 2131099696;
@@ -2380,8 +2386,8 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06003c
 			public const int topPanel = 2131099708;
 			
-			// aapt resource value: 0x7f0600bd
-			public const int txt1 = 2131099837;
+			// aapt resource value: 0x7f0600bf
+			public const int txt1 = 2131099839;
 			
 			// aapt resource value: 0x7f060069
 			public const int txt13 = 2131099753;
@@ -2410,11 +2416,11 @@ namespace EHR_Application
 			// aapt resource value: 0x7f06006f
 			public const int txt24 = 2131099759;
 			
-			// aapt resource value: 0x7f0600b8
-			public const int txtAllergy = 2131099832;
+			// aapt resource value: 0x7f0600ba
+			public const int txtAllergy = 2131099834;
 			
-			// aapt resource value: 0x7f0600b6
-			public const int txtDescription = 2131099830;
+			// aapt resource value: 0x7f0600b8
+			public const int txtDescription = 2131099832;
 			
 			// aapt resource value: 0x7f06005e
 			public const int txtFirstName = 2131099742;
@@ -2422,14 +2428,14 @@ namespace EHR_Application
 			// aapt resource value: 0x7f060061
 			public const int txtLastName = 2131099745;
 			
-			// aapt resource value: 0x7f0600b9
-			public const int txtReaction = 2131099833;
+			// aapt resource value: 0x7f0600bb
+			public const int txtReaction = 2131099835;
 			
 			// aapt resource value: 0x7f060064
 			public const int txtSpeciality = 2131099748;
 			
-			// aapt resource value: 0x7f0600ba
-			public const int txtseverity = 2131099834;
+			// aapt resource value: 0x7f0600bc
+			public const int txtseverity = 2131099836;
 			
 			// aapt resource value: 0x7f060009
 			public const int up = 2131099657;

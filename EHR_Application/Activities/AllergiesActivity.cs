@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -66,7 +65,9 @@ namespace EHR_Application.Activities
             }
             catch
             {
-              new AlertDialog.Builder(this)
+                deserializedAllergies = JsonConvert.DeserializeObject<List<Allergies>>("[]".ToString());
+
+                new AlertDialog.Builder(this)
               .SetTitle("An error has occured")
               .SetMessage("No data found due to unexpected problem")
               .SetIcon(Resource.Drawable.error)

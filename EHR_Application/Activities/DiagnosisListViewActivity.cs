@@ -48,7 +48,7 @@ namespace EHR_Application.Activities
             
             ConsumeRest cRest = new ConsumeRest();
             Address address = new Address();
-            string endpoint = address.Endpoint + "Diagnosi/" + VisitID ;
+            string endpoint = address.Endpoint + "DIagnosis/"/* + "Diagnosi/"*/ + VisitID ;
             strResponse = cRest.makeRequest(endpoint);
            
             ValidateJson validateJson = new ValidateJson();
@@ -62,9 +62,11 @@ namespace EHR_Application.Activities
             }
             else
             {
+                Diagnosis = JsonConvert.DeserializeObject<List<DIagnosis>>("[]".ToString());
+
                 new Android.App.AlertDialog.Builder(this)
                 .SetTitle("An error has occured")
-                .SetMessage("No data found do to unexpected problem" + "n/" + strResponse)
+                .SetMessage("No data found do to unexpected problem" + "\n" + strResponse)
                 .SetIcon(Resource.Drawable.error)
                 .Show();
             }
@@ -100,13 +102,15 @@ namespace EHR_Application.Activities
             int Visit_Count = Diagnosis.Count;
             for (int i = 0; i < Diagnosis.Count; i++)
             {
-                string Description = "Discription :" + Diagnosis[i].Description;
-                string ICDcode     = "ICD-CODE :"    + Diagnosis[i].ICD_CODE;
+                string Description = "Doctor's Notes : " + Diagnosis[i].Description;
+                string ICDchapter  = "Disease category : " + Diagnosis[i].ICD_Chapter;
+                string ICDcode     = "Disease : "    + Diagnosis[i].ICD_Code;
                 
                 List<string> a = new List<string>();
-                a.Add(Description);
+                a.Add(ICDchapter);
                 a.Add(ICDcode);
-               
+                a.Add(Description);
+
                 group.Add("Diagnosis: " + i.ToString());
                 dicMyMap.Add(group[i], a);
             }

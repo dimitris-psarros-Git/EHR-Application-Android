@@ -72,15 +72,18 @@ namespace EHR_Application.Activities
             {
                 imageIds = JsonConvert.DeserializeObject<List<imageIDs>>(strResponse.ToString());
                 imageIds = imageIds.OrderBy(i => i.FirstName).ToList();
+                SetData();
             }
             else
             {
+                imageIds = JsonConvert.DeserializeObject<List<imageIDs>>("[]".ToString());
+
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
-               .SetMessage("No data found due to unexpected problem" + "n/" + strResponse)
+               .SetIcon(Resource.Drawable.error)
+               .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
                .Show();
             }
-            SetData();
         }
 
         public void SetData()
@@ -136,6 +139,7 @@ namespace EHR_Application.Activities
             {
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
+               .SetIcon(Resource.Drawable.error)
                .SetMessage("No data found due to unexpected problem")
                .Show();
             }

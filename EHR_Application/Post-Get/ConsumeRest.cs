@@ -86,7 +86,7 @@ namespace EHR_Application
                    //Status Description: ((HttpWebResponse)e.Response).StatusDescription);
                 } 
                 return e.Message.ToString(); //e.Status , e.Response.StatusDescription , e.Responce.StatusCode
-
+              
             }
             catch (Exception e)
             {

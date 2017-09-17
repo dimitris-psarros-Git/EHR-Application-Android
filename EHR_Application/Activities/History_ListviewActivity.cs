@@ -44,6 +44,7 @@ namespace EHR_Application
             myID = Intent.GetIntExtra("myID", -1);
             receiverID = Intent.GetIntExtra("receiverID", -1);
             
+            
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
             // SupportActionBar.Title = "Expandable ListView";
@@ -86,7 +87,7 @@ namespace EHR_Application
 
             RetrieveData retrieve = new RetrieveData();  // retrieve "IsDoctor"
             IsDoctor = retrieve.RetreiveBool();
-
+            
             if (IsDoctor == false) { endpoint = address.Endpoint2 + "visits//?PersonId=" + myID; }       
             else                   { endpoint = address.Endpoint2 + "visits//?PersonId=" + receiverID; }
 
@@ -107,9 +108,11 @@ namespace EHR_Application
             }
             else
             {
+                VISIT2 = JsonConvert.DeserializeObject<List<Visit2>>("[]".ToString());
+
                 new Android.App.AlertDialog.Builder(this)
                 .SetTitle("An error has occured")
-                .SetMessage("No data found do to unexpected problem" + "n/" + strResponse)
+                .SetMessage("No data found do to unexpected problem" + "\n" + strResponse)
                 .SetIcon(Resource.Drawable.error)
                 .Show();
             }

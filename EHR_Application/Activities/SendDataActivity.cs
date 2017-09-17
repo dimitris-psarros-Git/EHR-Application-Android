@@ -265,7 +265,7 @@ namespace EHR_Application
             {
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
-               .SetMessage("No data found due to unexpected problem" + "n/" + strResponse)
+               .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
                .SetIcon(Resource.Drawable.error)
                .Show();
             }

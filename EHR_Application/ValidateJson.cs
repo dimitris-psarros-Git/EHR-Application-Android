@@ -24,7 +24,7 @@ namespace EHR_Application
             }
             else
             {
-                string StringValue = stringValue.ToString();             // egine allagh. apo object to kaname string 
+                string StringValue = stringValue.ToString();            
                 var value = StringValue.Trim();
 
                 if ((value.StartsWith("{") && value.EndsWith("}")) || //For object

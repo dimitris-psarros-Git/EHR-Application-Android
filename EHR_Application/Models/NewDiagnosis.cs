@@ -16,6 +16,8 @@ namespace EHR_Application.Models
     {
         public int VisitID { get; set; }
         public string Description { get; set; }
-        public string ICD_CODE { get; set; }
+        public int ICD_Code_Id { get; set; }
+        public string ICD_Chapter { get; set; }
+
     }
 }

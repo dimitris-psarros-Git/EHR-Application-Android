@@ -15,18 +15,19 @@ using Android.Views;
 using Android.Support.V7.App;
 using Android.Preferences;
 using EHR_Application.Post_Get;
+using Android.Graphics;
 
 namespace EHR_Application
 {
     [Activity(Label = "    Login   ", Icon = "@drawable/icon" ,Theme = "@style/MyTheme" /*Theme = "@style/MyTheme1"*/ /*"@style/Theme.AppCompat.Light"*/ )]
     public class LoginActivity : AppCompatActivity
     {
-        List<NewMessages2> newMessages;
+        List<NewMessages2> newMessages, newMessages2;
         TextView txt1;
         TextView txt2;
         EditText Username;
         EditText Password;
-        int myId = 0;
+        int myId;//= 0;
         bool IsDoctor;
 
 
@@ -34,10 +35,11 @@ namespace EHR_Application
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.MainLayout);
-            
+
             //var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             //SetSupportActionBar(toolbar);
-            
+
+            txt2 = null;
             txt1 = FindViewById<TextView>(Resource.Id.txt1);    
             txt2 = FindViewById<TextView>(Resource.Id.txt2);
 
@@ -85,18 +87,28 @@ namespace EHR_Application
             if (IsValidJson && IsValidJson2)
             {
                 // check for new images
-                newMessages = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse.ToString());
-                if (newMessages.Count != 0) { newImages = true;  }
+                newMessages2 = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse2.ToString());
+                if (newMessages2.Count != 0) { newImages = true;  }
                 else                        { newImages = false; }
 
 
                 newMessages = JsonConvert.DeserializeObject<List<NewMessages2>>(strResponse.ToString());
                 
-                if (newMessages.Count != 0)
+                if (newMessages.Count != 0 || newImages==true )
                 {
-                    for(int i=0; i < newMessages.Count; i++)
+                    if (newMessages.Count != 0)
                     {
-                        MessageDelivered(i);                    
+                        for (int i = 0; i < newMessages.Count; i++)
+                        {
+                            MessageDelivered(i,false);
+                        }
+                    }
+                    if(newImages == true)
+                    {
+                        for (int i = 0; i < newMessages2.Count; i++)
+                        {
+                            MessageDelivered(i,true);
+                        }
                     }
                     
                     RunOnUiThread(() =>
@@ -104,29 +116,24 @@ namespace EHR_Application
                         Toast.MakeText(this, "New message Arrived", ToastLength.Short).Show();
                     });
                    
-                    
                     // Set up an intent so that tapping the notifications returns to this app:
                     Intent intent = new Intent(this, typeof(NewMessagesListActivity));
 
                     // Pass some information to SecondActivity:
-                    Intent.PutExtra("myID", myId);
-                    Intent.PutExtra("newImage", newImages);
+                    intent.PutExtra("myID", myId);
+                    intent.PutExtra("newImage", newImages);
+                    Intent.PutExtra("message", "Greetings from MainActivity!");
 
                     // Create a task stack builder to manage the back stack:
                     TaskStackBuilder stackBuilder = TaskStackBuilder.Create(this);
 
                     // Add all parents of SecondActivity to the stack: 
-                    stackBuilder.AddParentStack(Java.Lang.Class.FromType(typeof(ChatBubbleActivity)));
+                    stackBuilder.AddParentStack(Java.Lang.Class.FromType(typeof(NewMessagesListActivity)));
 
                     // Push the intent that starts SecondActivity onto the stack:
                     stackBuilder.AddNextIntent(intent);
                     
-                    //for (int i = 0; i < newMessages.Count; i++)
-                    //{
-                        //int NotificName = newMessages[i].PersonID;
-                        ///string NotificDate = newMessages[i].Date;
-                        //string NotificText = newMessages[i].Text;
-
+                   
                         // Create a PendingIntent; we're only using one PendingIntent (ID = 0):
                         const int pendingIntentId = 0;
                         PendingIntent pendingIntent =
@@ -138,11 +145,8 @@ namespace EHR_Application
                             .SetAutoCancel(true)
                             .SetOnlyAlertOnce(true)
                             .SetContentIntent(pendingIntent)
-                            //.SetContentTitle("New Message from " + newMessages[i].FirstName + " " + newMessages[i].LastName)
-                            //.SetContentText("Text : " + NotificText)
                             .SetContentTitle("New messages arrived")
-                            .SetProgress(4, 1, true)
-                            
+                            .SetContentText("There are "+newMessages.Count.ToString()+" new text messages , and "+newMessages2.Count.ToString()+" new image messages")
                             .SetDefaults(NotificationDefaults.Sound | NotificationDefaults.Vibrate)
                             .SetSmallIcon(Resource.Drawable.Icon);
                         
@@ -156,26 +160,35 @@ namespace EHR_Application
                         // Publish the notification:
                         const int notificationId = 0;
                         notificationManager.Notify(notificationId, notification);
-                    //}
                 }
             }
         }
 
-        private async void MessageDelivered(int inumber)
+        private  async  void MessageDelivered(int inumber,bool image)
         {
             Address address = new Address();
             string endpoint3;
-
+            string output;
             PutRest putrest = new PutRest();
-            endpoint3 = address.Endpoint + "DataSenders/" + newMessages[inumber].DataSenderID;
-            var uri = new Uri(endpoint3);
-
             NewMessages newmessages = new NewMessages();
-            newmessages.DataSenderID = newMessages[inumber].DataSenderID;
-            newmessages.Seen = false;
-            newmessages.Send = true;
-
-            string output = JsonConvert.SerializeObject(newmessages);
+            if (image == true) {
+                endpoint3 = address.Endpoint + "DataSenders/" + newMessages2[inumber].DataSenderID;
+                
+                newmessages.DataSenderID = newMessages2[inumber].DataSenderID;
+                newmessages.Seen = false;
+                newmessages.Send = true;
+                output = JsonConvert.SerializeObject(newmessages);
+            }
+            else
+            {
+                endpoint3 = address.Endpoint + "DataSenders/" + newMessages[inumber].DataSenderID;
+                newmessages.DataSenderID = newMessages[inumber].DataSenderID;
+                newmessages.Seen = false;
+                newmessages.Send = true;
+                output = JsonConvert.SerializeObject(newmessages);
+            }
+            var uri = new Uri(endpoint3);
+          
             var StrRespPost = await PutRest.Put(output, uri);
         }
         
@@ -196,6 +209,7 @@ namespace EHR_Application
             
             string output = JsonConvert.SerializeObject(usercheck);
             var StrRespPost = await PostRest.Post(output, uri, false);
+
             ValidateJson validatejson = new ValidateJson();
             bool valid = validatejson.IsValidJson(StrRespPost);
 
@@ -204,9 +218,7 @@ namespace EHR_Application
                 try
                 {
                     UserIdentity userident = JsonConvert.DeserializeObject<UserIdentity>(StrRespPost.ToString());
-
-                    if (userident != null)
-                    {
+                    
                         IsDoctor = userident.IsDoctor;
                         myId = userident.PersonID;
 
@@ -224,22 +236,23 @@ namespace EHR_Application
                             intent.PutExtra("myID", myId);
                             StartActivity(intent);
                         }
-                    }
-                    else
-                    {
-                        txt2.Text = "Unsuccessfull Login due to an error";
-                    }
                 }
                 catch
                 {
                     txt2.Text = "Unsuccessfull Login due to an error";
                 }
             }
+            else if(StrRespPost=="NotFound")
+            {
+                txt2.Text = "Error"+ "\n" + "Unsuccessfull Login UserName or Password isn't valid ," + StrRespPost;
+                txt2.SetTextColor(Color.Red);
+                Password.Text = "";
+            }
             else
             {
-                txt2.Text = "Unsuccessfull Login UserName or Password isn't valid" + "\n" + "Or check internet connection" +"\n" + StrRespPost;
+                txt2.Text = "An error occured :" + "\n" + StrRespPost;
+                txt2.SetTextColor(Color.Red);
             }
-
         }
 
         public void AlertBox()

@@ -37,7 +37,8 @@
         <TextView
             android:layout_width="300px"
             android:layout_height="match_parent"
-            android:id="@+id/txt13" />
+            android:id="@+id/txt13"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -54,7 +55,8 @@
         <TextView
             android:layout_width="300px"
             android:layout_height="match_parent"
-            android:id="@+id/txt14" />
+            android:id="@+id/txt14"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -69,9 +71,10 @@
             android:id="@+id/textView4"
             android:gravity="center" />
         <TextView
-            android:layout_width="200px"
+            android:layout_width="300px"
             android:layout_height="match_parent"
-            android:id="@+id/txt15" />
+            android:id="@+id/txt15"
+            android:gravity="center" />
         <TextView
             android:text="City :"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -82,7 +85,8 @@
         <TextView
             android:layout_width="300px"
             android:layout_height="match_parent"
-            android:id="@+id/txt16" />
+            android:id="@+id/txt16"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -97,9 +101,10 @@
             android:id="@+id/textView5"
             android:gravity="center" />
         <TextView
-            android:layout_width="200px"
+            android:layout_width="300px"
             android:layout_height="match_parent"
-            android:id="@+id/txt24" />
+            android:id="@+id/txt24"
+            android:gravity="center" />
         <TextView
             android:text="StretNumber :"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -110,7 +115,8 @@
         <TextView
             android:layout_width="200px"
             android:layout_height="match_parent"
-            android:id="@+id/txt17" />
+            android:id="@+id/txt17"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -127,7 +133,8 @@
         <TextView
             android:layout_width="300px"
             android:layout_height="match_parent"
-            android:id="@+id/txt18" />
+            android:id="@+id/txt18"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -144,7 +151,8 @@
         <TextView
             android:layout_width="300px"
             android:layout_height="match_parent"
-            android:id="@+id/txt19" />
+            android:id="@+id/txt19"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

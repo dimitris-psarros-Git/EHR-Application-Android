@@ -14,7 +14,7 @@ namespace EHR_Application
 {
     class Address
     {
-        public string Endpoint = "http://192.168.1.67:54240/api/";
-        public string Endpoint2= "http://192.168.1.67:54240//api/";
+        public string Endpoint = "http://192.168.2.14:54240/api/";
+        public string Endpoint2= "http://192.168.2.14:54240//api/";
     }
 }

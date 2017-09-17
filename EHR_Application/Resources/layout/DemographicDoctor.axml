@@ -27,11 +27,13 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView2" />
+            android:id="@+id/textView2"
+            android:gravity="center" />
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="400px"
             android:layout_height="match_parent"
-            android:id="@+id/txtFirstName" />
+            android:id="@+id/txtFirstName"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -43,11 +45,13 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView3" />
+            android:id="@+id/textView3"
+            android:gravity="center" />
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="400px"
             android:layout_height="match_parent"
-            android:id="@+id/txtLastName" />
+            android:id="@+id/txtLastName"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -59,11 +63,13 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView4" />
+            android:id="@+id/textView4"
+            android:gravity="center" />
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="400px"
             android:layout_height="match_parent"
-            android:id="@+id/txtSpeciality" />
+            android:id="@+id/txtSpeciality"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

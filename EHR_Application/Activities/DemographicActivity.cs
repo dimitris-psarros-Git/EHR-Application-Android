@@ -17,6 +17,7 @@ using EHR_Application.Activities;
 using Java.Util;
 using Android.Preferences;
 using EHR_Application.Post_Get;
+using System.Globalization;
 
 namespace EHR_Application
 {
@@ -172,6 +173,8 @@ namespace EHR_Application
             strResponse = cRest.makeRequest(endpoint);
             IsValidJson = validateJson.IsValidJson(strResponse);
 
+            DateTime d;
+
             if (IsValidJson)
             {
                 demogr = JsonConvert.DeserializeObject<demographics>(strResponse.ToString());
@@ -232,7 +235,7 @@ namespace EHR_Application
                 Number = deserializedContacts.Count;
                 for (int i = 0; i < deserializedContacts.Count; i++)
                 {
-                    string NAME = deserializedContacts[i].FirstName + " " + deserializedContacts[i].LastName;
+                    string NAME = deserializedContacts[i].FirstName + " " + deserializedContacts[i].LastName+ "  " + deserializedContacts[i].speciality;
 
                     _lstDataItem.Add(NAME);
                 }
@@ -249,6 +252,7 @@ namespace EHR_Application
             {
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
+               .SetIcon(Resource.Drawable.error)
                .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
                .Show();
             }

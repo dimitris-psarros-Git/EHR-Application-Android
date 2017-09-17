@@ -76,7 +76,7 @@ namespace EHR_Application.Activities
 
             ValidateJson validateJson = new ValidateJson();
             IsValidJson1 = validateJson.IsValidJson(strResponse);
-
+            
             if (IsValidJson1)
             {
                 deserializedFriends = JsonConvert.DeserializeObject<List<friends>>(strResponse.ToString());
@@ -84,9 +84,12 @@ namespace EHR_Application.Activities
             }
             else
             {
+                deserializedFriends = JsonConvert.DeserializeObject<List<friends>>("[]".ToString());  
+
                 new AlertDialog.Builder(this)
                 .SetTitle("An error has occured")
-                .SetMessage("No data found due to unexpected problem")
+                .SetIcon(Resource.Drawable.error)
+                .SetMessage("No data found due to unexpected problem " + strResponse)
                 .Show();
             }
             SetData();
@@ -147,7 +150,7 @@ namespace EHR_Application.Activities
                 {
                     var intent = new Intent(this, typeof(ImagesActivity));
                     intent.PutExtra("myID", myID);
-                    intent.PutExtra("ConnectID", receiverID);
+                    intent.PutExtra("receiverID", receiverID);
                     StartActivity(intent);
                 }
                 if (sendData)

@@ -17,7 +17,8 @@ namespace EHR_Application
         public int DiagnosisID { get; set; }
         public Nullable<int> VisitID { get; set; }
         public string Description { get; set; }
-        public string ICD_CODE { get; set; }
-        
+        public string ICD_Code { get; set; }
+        public string ICD_Chapter { get; set; }
+
     }
 }

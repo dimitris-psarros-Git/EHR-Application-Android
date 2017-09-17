@@ -29,13 +29,18 @@ namespace EHR_Application
                     var response2 = await client.PostAsync(uri, content);     
                     var stringID = response2.Content.ReadAsStringAsync().Result;
 
-                    if (response2.IsSuccessStatusCode) 
+                    if (response2.IsSuccessStatusCode)
                     {
-                        var responseContent = await response2.Content.ReadAsStringAsync();
-                        var authData = JsonConvert.DeserializeObject<ResponseModel>(responseContent);
+                        //  var responseContent = await response2.Content.ReadAsStringAsync();
+                        //  var authData = JsonConvert.DeserializeObject<ResponseModel>(responseContent);
+
+                        if (Status) { return response2.StatusCode.ToString(); }
+                        else { return response2.Content.ReadAsStringAsync().Result.ToString(); }
                     }
-                    if (Status) { return response2.StatusCode.ToString(); }
-                    else        { return response2.Content.ReadAsStringAsync().Result.ToString(); }
+                    else
+                    {
+                        return response2.StatusCode.ToString();
+                    }
                 }
                 catch (WebException e)
                 {

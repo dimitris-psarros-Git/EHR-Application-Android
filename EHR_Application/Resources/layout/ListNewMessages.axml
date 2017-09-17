@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:id="@+id/textView1"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textScaleX="1" />
     </LinearLayout>
     <ListView
         android:id="@+id/listViewMessages"
@@ -36,19 +37,21 @@
             android:layout_height="match_parent"
             android:id="@+id/textView2"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textScaleX="1" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="80px"
+        android:layout_height="300px"
         android:id="@+id/linearLayout2">
         <TextView
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/textView3" />
+            android:layout_height="200px"
+            android:id="@+id/textView3"
+            android:gravity="center" />
     </LinearLayout>
 </LinearLayout>

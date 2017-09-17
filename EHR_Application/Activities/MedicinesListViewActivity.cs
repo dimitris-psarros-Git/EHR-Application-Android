@@ -60,9 +60,11 @@ namespace EHR_Application.Activities
             }
             else
             {
+                Medicines = JsonConvert.DeserializeObject<List<Treat_Medicines>>("[]".ToString());
+
                 new Android.App.AlertDialog.Builder(this)
                 .SetTitle("An error has occured")
-                .SetMessage("No data found do to unexpected problem" + "n/" + strResponse)
+                .SetMessage("No data found do to unexpected problem" + "\n" + strResponse)
                 .SetIcon(Resource.Drawable.error)
                 .Show();
             }

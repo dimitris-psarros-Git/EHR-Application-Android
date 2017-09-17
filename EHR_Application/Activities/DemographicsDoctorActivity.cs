@@ -81,6 +81,7 @@ namespace EHR_Application.Activities
             {
                 Toast.MakeText(this, "Allergy", ToastLength.Short).Show();
                 var intent = new Intent(this, typeof(ListviewContactsActivity));
+                intent.PutExtra("myID", myID);
                 intent.PutExtra("Allergy", true);
                 StartActivity(intent);
                 return true;
@@ -163,7 +164,8 @@ namespace EHR_Application.Activities
                 else{ 
                        new AlertDialog.Builder(this)
                       .SetTitle("An error has occured")
-                      .SetMessage("No data found due to unexpected problem" + "n/" + strResponse)
+                      .SetIcon(Resource.Drawable.error)
+                      .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
                       .Show();
                 }
         }
@@ -211,6 +213,7 @@ namespace EHR_Application.Activities
             {
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
+               .SetIcon(Resource.Drawable.error)
                .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
                .Show();
             }
@@ -264,6 +267,7 @@ namespace EHR_Application.Activities
             {
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
+               .SetIcon(Resource.Drawable.error)
                .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
                .Show();
             }
@@ -327,6 +331,7 @@ namespace EHR_Application.Activities
             {
                 new AlertDialog.Builder(this)
                .SetTitle("An error has occured")
+               .SetIcon(Resource.Drawable.error)
                .SetMessage("No data found due to unexpected problem" + "\n" + strResponse)
                .Show();
             }

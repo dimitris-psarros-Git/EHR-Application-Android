@@ -15,9 +15,9 @@
             android:text=" Wellcome to EHR APP"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="100px"
             android:id="@+id/textView1"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_height="match_parent" />
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
